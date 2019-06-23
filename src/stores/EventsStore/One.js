@@ -44,18 +44,14 @@ const EventsStore = types.model('EventsStore', {
     return Promise.reject(error);
   },
   resetData(response) {
-    const {status, data} = response;
-
-    if (status === 200) {
-      applySnapshot(self, data);
-    }
+    applySnapshot(self, {data: response});
 
     return self;
   },
-  fetch(query) {
+  fetch(id) {
     self.setStatusPending();
 
-    return Events.get({query})
+    return Events.get(id)
       .then(self.resetData)
       .then(self.setStatusDone)
       .catch(self.onError);
@@ -64,6 +60,14 @@ const EventsStore = types.model('EventsStore', {
     self.setStatusPending();
 
     return Events.create(data)
+      .then(self.resetData)
+      .then(self.setStatusDone)
+      .catch(self.onError);
+  },
+  update(id, data) {
+    self.setStatusPending();
+
+    return Events.patch(id, data)
       .then(self.resetData)
       .then(self.setStatusDone)
       .catch(self.onError);

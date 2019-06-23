@@ -44,6 +44,8 @@ const EventsStore = types.model('EventsStore', {
     return Promise.reject(error);
   },
   resetData(response) {
+    console.log('resetData', response);
+
     applySnapshot(self, response);
 
     return self;
@@ -56,12 +58,12 @@ const EventsStore = types.model('EventsStore', {
       .then(self.setStatusDone)
       .catch(self.onError);
   },
-  create(data) {
+  delete(id) {
     self.setStatusPending();
 
-    return Events.create(data)
-      .then(self.resetData)
+    return Events.remove(id)
       .then(self.setStatusDone)
+      .then(self.fetch)
       .catch(self.onError);
   }
 }));

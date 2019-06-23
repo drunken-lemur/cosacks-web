@@ -5,17 +5,17 @@ import {withRouter} from 'react-router-dom';
 import {observer, Provider} from 'mobx-react';
 
 import EventsStore from 'stores/EventsStore/One';
-import CreateFormStore from 'stores/forms/Events/CreateForm';
+import EditFormStore from 'stores/forms/Events/EditForm';
 
-import {CreateForm} from './components';
+import {EditForm} from './components';
 
 const Wrapper = styled.div``;
 
 @withRouter
 @observer
-class EventCreate extends React.Component {
+class EventEdit extends React.Component {
   static propTypes = {
-    className: PropTypes.string,
+    className: PropTypes.string
   };
 
   static defaultProps = {
@@ -32,16 +32,12 @@ class EventCreate extends React.Component {
   };
 
   onSuccess = form => {
-    const values = form.values();
+    const {match} = this.props;
+    const data = form.values();
     const {eventsStore, navigateTo} = this;
 
-    eventsStore.create(values)
-      .then(navigateTo)
-      .finally(form.reset.bind(form));
-  };
-
-  onError = form => {
-    console.log('onError', {form});
+    eventsStore.update(match.params.id, data)
+      .then(navigateTo);
   };
 
   onClose = () => {
@@ -54,27 +50,37 @@ class EventCreate extends React.Component {
     super(props);
 
     const {onSuccess, onError} = this;
-    this.createForm = new CreateFormStore({onSuccess, onError});
+    this.editForm = new EditFormStore({onSuccess, onError});
 
     this.eventsStore = EventsStore.create();
   }
 
+  componentDidMount() {
+    const {match} = this.props;
+    const {eventsStore, editForm} = this;
+
+    eventsStore.fetch(match.params.id)
+      .then(({data}) => {
+        editForm.set('value', data.toJSON());
+      });
+  }
+
   render() {
     const {...rest} = this.props;
-    const {createForm, eventsStore, onClose} = this;
+    const {editForm, eventsStore, onClose} = this;
 
     if (eventsStore.isPending) {
       return 'Loading...';
     }
 
     return (
-      <Provider {...{createForm}}>
+      <Provider {...{editForm}}>
         <Wrapper {...rest}>
-          <CreateForm {...{onClose}}/>
+          <EditForm {...{onClose}}/>
         </Wrapper>
       </Provider>
     );
   }
 }
 
-export default styled(EventCreate)``;
+export default styled(EventEdit)``;
