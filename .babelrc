@@ -1,0 +1,28 @@
+{
+  "presets": ["@babel/react", "@babel/env"],
+  "plugins": [
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }],
+    ["module-resolver", {
+      "root": ["./"],
+      "alias": {
+        "Modules": "./src/components/modules",
+        "Stores": "./src/stores/",
+        "Forms": "./src/forms/",
+        "Pages": "./src/pages/",
+        "Utils": "./src/utils/",
+        "Connection": "./src/connection",
+        "Components": "./src/components/"
+      }
+    }]
+  ],
+
+  "env": {
+    "development": {
+      "plugins": [["babel-plugin-styled-components", { "displayName": true }]]
+    },
+    "production": {
+      "plugins": [["babel-plugin-styled-components", { "displayName": false }]]
+    }
+  }
+}
