@@ -1,10 +1,10 @@
-import { types, applySnapshot } from 'mobx-state-tree';
+import {applySnapshot, types} from 'mobx-state-tree';
 import instance from 'Connection/instance';
 import store from 'store';
 import _pick from 'lodash/pick';
 
-import { Payload } from './Payload';
-import { verifyJWT } from 'Utils/jwt';
+import {Payload} from './Payload';
+import {verifyJWT} from 'Utils/jwt';
 
 const USER_ATTRS = [
   'id',
@@ -40,10 +40,10 @@ const AuthStore = types
     },
 
     login(values = {}) {
-      const data = { user: values };
+      const data = {user: values};
 
       const config = {
-        headers: { Authorization: null }
+        headers: {Authorization: null}
       };
 
       return instance
@@ -73,7 +73,7 @@ const AuthStore = types
     },
 
     assignSettings(response) {
-      const { setting } = response.data.client;
+      const {setting} = response.data.client;
       applySnapshot(self.setting, setting);
     },
 
@@ -85,7 +85,7 @@ const AuthStore = types
     },
 
     setDefaultsHeader(data) {
-      const { token } = data;
+      const {token} = data;
       instance.defaults.headers.common['Authorization'] = [
         'Bearer',
         token

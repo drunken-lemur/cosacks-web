@@ -1,3 +1,8 @@
+export { default as EventCreatePage } from './EventCreatePage';
+export { default as EventsListPage } from './EventsListPage';
+export { default as EventPage } from './EventPage';
+export { default as EventSubscribePage } from './EventSubscribePage';
+
 export { default as HomePage } from './HomePage';
 export { default as HotelsPage } from './HotelsPage';
 export { default as LoginPage } from './LoginPage';

@@ -1,7 +1,9 @@
 import React from 'react';
 import * as R from 'ramda';
-import { inject, observer } from 'mobx-react';
-import { branch, compose, mapProps } from 'recompose';
+import {inject, observer} from 'mobx-react';
+import {branch, compose, mapProps} from 'recompose';
+
+export {default as client} from './client';
 
 export const formatPrice = (price, currency = 'RUB') =>
   new Intl.NumberFormat('ru-RU', {
@@ -12,7 +14,7 @@ export const formatPrice = (price, currency = 'RUB') =>
 
 export const logAction = title => (...args) => console.log(title, ...args);
 
-export const useStore = component => ({ useStore, storeMap, ...props }) => {
+export const useStore = component => ({useStore, storeMap, ...props}) => {
   const storeToProp = storeMap || (p => p);
   const Component = branch(
     () => useStore,
@@ -23,7 +25,7 @@ export const useStore = component => ({ useStore, storeMap, ...props }) => {
         const store = props[useStore];
 
         if (store && storeMap) {
-          return { ...props, ...storeToProp(store) };
+          return {...props, ...storeToProp(store)};
         }
 
         return props;
@@ -51,7 +53,7 @@ export const injectMap = (store, propMap) => Component => {
     compose(
       inject(store),
       observer,
-      mapProps(props => ({ ...props, ...propMap(props[store]) }))
+      mapProps(props => ({...props, ...propMap(props[store])}))
     )
   )(Component);
 };

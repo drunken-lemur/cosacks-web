@@ -7,7 +7,7 @@ import MainProvider from 'common/MainProvider';
 import CustomRoute from 'common/CustomRoute';
 
 import { LoginPage, NotFoundPage } from 'pages';
-import { Orders } from "Modules";
+import { Orders, Events } from "Modules";
 
 const routes = [{
   path: '/login',
@@ -16,6 +16,10 @@ const routes = [{
   path: '/orders',
   isPrivate: true,
   component: Orders
+}, {
+  path: '/events',
+  isPrivate: true,
+  component: Events
 }, {
   path: '*',
   component: NotFoundPage
