@@ -29,6 +29,10 @@ const EventsStore = types.model('EventsStore', {
 
     return self;
   },
+  setStatusPending() {
+    self.setStatus(Statuses.pending);
+    return self;
+  },
   setStatusDone(response) {
     self.setStatus(Statuses.done);
 
@@ -49,9 +53,17 @@ const EventsStore = types.model('EventsStore', {
     return self;
   },
   fetch(query) {
-    self.setStatus(Statuses.pending);
+    self.setStatusPending();
 
-    return Events.find({query})
+    return Events.get({query})
+      .then(self.resetData)
+      .then(self.setStatusDone)
+      .catch(self.onError);
+  },
+  create(data) {
+    self.setStatusPending();
+
+    return Events.create(data)
       .then(self.resetData)
       .then(self.setStatusDone)
       .catch(self.onError);

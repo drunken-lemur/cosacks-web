@@ -1,20 +1,20 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import {observer, Provider} from 'mobx-react';
 
-import {One as EventsStore} from 'stores/EventsStore';
+import EventsStore from 'stores/EventsStore/List';
 
 const Wrapper = styled.div``;
 
 @observer
 class EventsList extends React.Component {
   static propTypes = {
-    className: PropTypes.string
+    className: PropTypes.string,
   };
 
   static defaultProps = {
-    className: ""
+    className: '',
   };
 
   constructor(props) {
@@ -28,11 +28,17 @@ class EventsList extends React.Component {
   }
 
   render() {
-    const { ...rest } = this.props;
+    const {eventsStore} = this;
+    const {...rest} = this.props;
 
     return (
       <Provider>
-        <Wrapper {...rest}>EventsList</Wrapper>
+        <Wrapper {...rest}>EventsList
+          <pre>
+            {eventsStore.status}
+            {JSON.stringify(eventsStore.data.toJSON())}
+          </pre>
+        </Wrapper>
       </Provider>
     );
   }

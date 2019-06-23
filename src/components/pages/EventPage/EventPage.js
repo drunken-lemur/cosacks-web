@@ -9,7 +9,6 @@ export const Wrapper = styled.div``;
 class EventPage extends React.PureComponent {
   static propTypes = {
     className: PropTypes.string,
-    subComponent: PropTypes.object
   };
 
   static defaultProps = {
@@ -17,14 +16,14 @@ class EventPage extends React.PureComponent {
   };
 
   render() {
-    const {className, ...rest} = this.props;
+    const {...rest} = this.props;
 
     return (
-      <Wrapper className={className} {...rest}>
+      <Wrapper {...rest}>
         <Event/>
       </Wrapper>
     );
   }
 }
 
-export default EventPage;
+export default styled(EventPage)``;
