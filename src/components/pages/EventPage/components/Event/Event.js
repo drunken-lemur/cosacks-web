@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import {observer, Provider} from 'mobx-react';
 
 import {One as EventsStore} from 'stores/EventsStore';
@@ -8,13 +8,13 @@ import {One as EventsStore} from 'stores/EventsStore';
 const Wrapper = styled.div``;
 
 @observer
-class EventsList extends React.Component {
+class Event extends React.PureComponent {
   static propTypes = {
     className: PropTypes.string
   };
 
   static defaultProps = {
-    className: ""
+    className: ''
   };
 
   constructor(props) {
@@ -28,14 +28,14 @@ class EventsList extends React.Component {
   }
 
   render() {
-    const { ...rest } = this.props;
+    const {...rest} = this.props;
 
     return (
       <Provider>
-        <Wrapper {...rest}>EventsList</Wrapper>
+        <Wrapper {...rest}>Event</Wrapper>
       </Provider>
     );
   }
 }
 
-export default styled(EventsList)``;
+export default styled(Event)``;
