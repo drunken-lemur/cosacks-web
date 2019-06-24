@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import {withRouter} from 'react-router-dom';
 import {observer, Provider} from 'mobx-react';
 
-import EventsStore from 'stores/EventsStore/One';
+import {EventsStore} from 'stores';
 import CreateFormStore from 'stores/forms/Events/CreateForm';
 
 import {CreateForm} from './components';

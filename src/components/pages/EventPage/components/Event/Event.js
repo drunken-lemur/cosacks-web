@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import {withRouter} from 'react-router-dom';
 import {observer, Provider} from 'mobx-react';
 
-import {One as EventsStore} from 'stores/EventsStore';
+import {EventsStore} from 'stores';
+import {Button} from '../../../../forms';
 
 const Wrapper = styled.div``;
 
@@ -19,6 +20,12 @@ class Event extends React.Component {
     className: ''
   };
 
+  onClose = () => {
+    const {history} = this.props;
+
+    history.replace('/events');
+  };
+
   constructor(props) {
     super(props);
 
@@ -28,17 +35,37 @@ class Event extends React.Component {
   componentWillMount() {
     const {match} = this.props;
 
-    this.eventsStore.fetch(match.params.id);
+    this.eventsStore.get(match.params.id);
   }
 
   render() {
-    const {eventsStore} = this;
     const {...rest} = this.props;
+    const {eventsStore, onClose} = this;
+
+    const event = eventsStore.data || {};
 
     return (
       <Provider>
-        <Wrapper {...rest}>Event
-          {JSON.stringify(eventsStore.data)}
+        <Wrapper {...rest}>
+          <div>Event</div>
+
+          <Button onClick={onClose}>Close</Button>
+
+          <article key={event._id}>
+            <div>
+              <strong>Name:</strong> {event.name}
+            </div>
+
+            <div>
+              <strong>Description:</strong> {event.description}
+            </div>
+
+            <div>
+              <strong>Start:</strong> {event.start} - <strong>End:</strong> {event.end}
+            </div>
+          </article>
+
+          <Button onClick={onClose}>Close</Button>
         </Wrapper>
       </Provider>
     );

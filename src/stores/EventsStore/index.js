@@ -1,2 +1,1 @@
-export {default as List} from './List';
-export {default as One} from './One';
+export {default} from './EventStore';

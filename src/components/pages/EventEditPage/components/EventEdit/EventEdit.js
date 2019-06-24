@@ -1,10 +1,11 @@
 import React from 'react';
+import {reaction} from 'mobx';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {withRouter} from 'react-router-dom';
 import {observer, Provider} from 'mobx-react';
 
-import EventsStore from 'stores/EventsStore/One';
+import {EventsStore} from 'stores';
 import EditFormStore from 'stores/forms/Events/EditForm';
 
 import {EditForm} from './components';
@@ -59,10 +60,20 @@ class EventEdit extends React.Component {
     const {match} = this.props;
     const {eventsStore, editForm} = this;
 
-    eventsStore.fetch(match.params.id)
-      .then(({data}) => {
-        editForm.set('value', data.toJSON());
-      });
+    this.reactions = [
+      reaction(
+        () => eventsStore.data,
+        () => {
+          editForm.set('value', eventsStore.data.toJSON());
+        }
+      )
+    ];
+
+    eventsStore.get(match.params.id);
+  }
+
+  componentWillUnmount() {
+    this.reactions.map(reaction => reaction());
   }
 
   render() {

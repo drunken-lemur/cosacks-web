@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import {observer, Provider} from 'mobx-react';
 import {NavLink, withRouter} from 'react-router-dom';
 
-import EventsStore from 'stores/EventsStore/List';
+import {EventsStore} from 'stores';
 
 const Wrapper = styled.div`
   color: #8B9898;
@@ -37,6 +37,12 @@ class EventsList extends React.Component {
     history.replace('/events/create');
   };
 
+  onView = id => () => {
+    const {history} = this.props;
+
+    history.replace(`/events/${id}`);
+  };
+
   onEdit = id => () => {
     const {history} = this.props;
 
@@ -54,14 +60,14 @@ class EventsList extends React.Component {
   }
 
   componentWillMount() {
-    this.eventsStore.fetch();
+    this.eventsStore.find();
   }
 
   render() {
     const {...rest} = this.props;
-    const {eventsStore, onCreate, onEdit, onDelete} = this;
+    const {eventsStore, onCreate, onView, onEdit, onDelete} = this;
 
-    const events = eventsStore.data.toJSON();
+    const events = eventsStore.list.toJSON();
 
     if (eventsStore.isPending) {
       return 'Loading...';
@@ -77,7 +83,7 @@ class EventsList extends React.Component {
           {events.map(event => (
             <article key={event._id}>
               <div>
-                <NavLink to={`/events/${event._id}/edit`}>
+                <NavLink to={`/events/${event._id}`}>
                   <strong>Name:</strong> {event.name}
                 </NavLink>
               </div>
@@ -89,6 +95,8 @@ class EventsList extends React.Component {
               <div>
                 <strong>Start:</strong> {event.start} - <strong>End:</strong> {event.end}
               </div>
+
+              <Button onClick={onView(event._id)}>View</Button>
 
               <Button onClick={onEdit(event._id)}>Edit</Button>
 
