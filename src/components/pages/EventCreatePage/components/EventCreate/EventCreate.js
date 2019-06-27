@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Loader from 'rambler-ui/Loader';
 import {withRouter} from 'react-router-dom';
 import {observer, Provider} from 'mobx-react';
 
-import {EventsStore} from 'stores';
+import {EventsStore} from 'stores/index';
 import CreateFormStore from 'stores/forms/Events/CreateForm';
 
-import {CreateForm} from './components';
+import {CreateForm} from './components/index';
 
 const Wrapper = styled.div``;
 
@@ -22,13 +23,10 @@ class EventCreate extends React.Component {
     className: ''
   };
 
-  navigateTo = ({data}) => {
-    const url = `/events/${data._id}/edit`;
+  navigateTo = () => {
     const {history} = this.props;
 
-    console.log('navigateTo:', url);
-
-    history.replace(url);
+    history.replace('/events');
   };
 
   onSuccess = form => {
@@ -63,14 +61,12 @@ class EventCreate extends React.Component {
     const {...rest} = this.props;
     const {createForm, eventsStore, onClose} = this;
 
-    if (eventsStore.isPending) {
-      return 'Loading...';
-    }
-
     return (
       <Provider {...{createForm}}>
         <Wrapper {...rest}>
-          <CreateForm {...{onClose}}/>
+          <Loader loading={eventsStore.isPending}>
+            <CreateForm {...{onClose}}/>
+          </Loader>
         </Wrapper>
       </Provider>
     );

@@ -1,3 +1,5 @@
+export {default as SignInPage} from './SignInPage';
+
 export {default as EventCreatePage} from './EventCreatePage';
 export {default as EventEditPage} from './EventEditPage';
 export {default as EventsListPage} from './EventsListPage';

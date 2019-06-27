@@ -1,14 +1,15 @@
 import React from 'react';
 import {reaction} from 'mobx';
 import PropTypes from 'prop-types';
+import Loader from 'rambler-ui/Loader';
 import styled from 'styled-components';
 import {withRouter} from 'react-router-dom';
 import {observer, Provider} from 'mobx-react';
 
-import {EventsStore} from 'stores';
+import {EventsStore} from 'stores/index';
 import EditFormStore from 'stores/forms/Events/EditForm';
 
-import {EditForm} from './components';
+import {EditForm} from './components/index';
 
 const Wrapper = styled.div``;
 
@@ -80,14 +81,12 @@ class EventEdit extends React.Component {
     const {...rest} = this.props;
     const {editForm, eventsStore, onClose} = this;
 
-    if (eventsStore.isPending) {
-      return 'Loading...';
-    }
-
     return (
       <Provider {...{editForm}}>
         <Wrapper {...rest}>
-          <EditForm {...{onClose}}/>
+          <Loader loading={eventsStore.isPending}>
+            <EditForm {...{onClose}}/>
+          </Loader>
         </Wrapper>
       </Provider>
     );

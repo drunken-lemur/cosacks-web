@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import {EventEdit} from './components';
+import {EventEdit} from './components/index';
 
 const Wrapper = styled.div``;
 

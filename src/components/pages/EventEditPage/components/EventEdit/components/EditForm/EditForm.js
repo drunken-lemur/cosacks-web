@@ -2,9 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {inject, observer} from 'mobx-react';
-import {Button, Field, Form, Input} from 'forms';
+import {Button, Field, Form, Input} from 'forms/index';
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  ${Button},
+  ${Input} {
+    margin: 8px;
+  }
+`;
 
 @inject('editForm')
 @observer

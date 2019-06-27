@@ -92,6 +92,7 @@ const createApiStore = (model, service) => {
       },
 
       find(...rest) {
+
         return self.request(service.find, ...rest);
       },
 
@@ -104,7 +105,12 @@ const createApiStore = (model, service) => {
       },
 
       delete(...rest) {
-        return self.request(service.remove, ...rest);
+        self.setStatusPending();
+
+        return service.remove
+          .apply(service, rest)
+          .then(self.setStatusDone)
+          .catch(self.onError);
       }
     }));
 };

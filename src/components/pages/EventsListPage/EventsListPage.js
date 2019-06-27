@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import {EventsList} from './components';
+import {EventsList} from './components/index';
 
 export const Wrapper = styled.div``;
 

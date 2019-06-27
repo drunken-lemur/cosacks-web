@@ -1,4 +1,4 @@
-import component from './';
+import component from '../../../../../../../index';
 
 export default [
   {

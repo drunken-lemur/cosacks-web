@@ -1,11 +1,11 @@
 import React from 'react';
+import {Button} from 'forms/index';
 import PropTypes from 'prop-types';
+import {EventsStore} from 'stores/index';
 import styled from 'styled-components';
+import Loader from 'rambler-ui/Loader';
 import {withRouter} from 'react-router-dom';
 import {observer, Provider} from 'mobx-react';
-
-import {EventsStore} from 'stores';
-import {Button} from '../../../../forms';
 
 const Wrapper = styled.div``;
 
@@ -51,6 +51,7 @@ class Event extends React.Component {
 
           <Button onClick={onClose}>Close</Button>
 
+          <Loader loading={eventsStore.isPending}>
           <article key={event._id}>
             <div>
               <strong>Name:</strong> {event.name}
@@ -64,6 +65,7 @@ class Event extends React.Component {
               <strong>Start:</strong> {event.start} - <strong>End:</strong> {event.end}
             </div>
           </article>
+          </Loader>
 
           <Button onClick={onClose}>Close</Button>
         </Wrapper>

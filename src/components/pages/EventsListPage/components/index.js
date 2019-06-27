@@ -1,1 +1,1 @@
-export {default as EventsList} from './EventsList';
+export {default as EventsList} from './EventsList/index';

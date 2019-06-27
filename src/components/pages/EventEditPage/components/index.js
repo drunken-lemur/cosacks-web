@@ -1,1 +1,1 @@
-export {default as EventEdit} from './EventEdit';
+export {default as EventEdit} from './EventEdit/index';

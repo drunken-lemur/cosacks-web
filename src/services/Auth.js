@@ -1,3 +1,5 @@
+import {client} from 'utils';
+
 import Api from './Api';
 
 const Auth = {
@@ -9,7 +11,14 @@ const Auth = {
         remember
       }
     }),
-  currentUser: () => Api.get('/current_user')
+
+  currentUser: () => Api.get('/current_user'),
+
+  authenticate: ({login, password}) => login && password
+    ? client.authenticate({strategy: 'local', login, password})
+    : client.authenticate(),
+
+  singOut: () => client.logout()
 };
 
 export default Auth;

@@ -1,12 +1,12 @@
+import React from 'react';
 import {observer} from 'mobx-react';
-import React, {Component} from 'react';
 import {Route, Switch, withRouter} from 'react-router-dom';
 
 import {EventCreatePage, EventEditPage, EventPage, EventsListPage, EventSubscribePage} from 'pages';
 
 @withRouter
 @observer
-class Orders extends Component {
+class Orders extends React.Component {
   render() {
     return (
       <Switch>
