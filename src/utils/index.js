@@ -4,6 +4,9 @@ import {inject, observer} from 'mobx-react';
 import {branch, compose, mapProps} from 'recompose';
 
 export {default as client} from './client';
+export {default as history} from './history';
+
+export const noop = () => undefined;
 
 export const formatPrice = (price, currency = 'RUB') =>
   new Intl.NumberFormat('ru-RU', {

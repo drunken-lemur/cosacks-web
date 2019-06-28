@@ -1,1 +1,1 @@
-export {default as PageGroup} from './PageGroup';
+export {default} from './PageGroup';

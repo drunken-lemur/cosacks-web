@@ -1,6 +1,6 @@
 import React from 'react';
+import {Default} from 'templates';
 import styled from 'styled-components';
-import { DefaultTemplate } from 'templates';
 
 const Wrapper = styled.div``;
 
@@ -10,6 +10,8 @@ const body = (
   </Wrapper>
 );
 
-const NotFoundPage = () => <DefaultTemplate body={body} />;
+const NotFoundPage = () => (
+  <Default body={body}/>
+);
 
 export default NotFoundPage;

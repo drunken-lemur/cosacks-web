@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {observer} from 'mobx-react';
 import DevTools from 'mobx-react-devtools';
-import {Redirect, Switch} from 'react-router-dom';
+import {Switch} from 'react-router-dom';
 
 import MainProvider from 'common/MainProvider';
 import CustomRoute from 'common/CustomRoute';
 
 import {LoginPage, NotFoundPage} from 'pages';
-import {Events, Orders, Auth} from 'Modules';
+import {Auth, Events, Orders} from 'Modules';
 
 const routes = [{
   path: '/login',
@@ -34,12 +34,6 @@ class App extends Component {
     return (
       <MainProvider>
         <Switch>
-          <Redirect
-            exact
-            from='/'
-            to='/orders'
-          />
-
           {routes.map((route, key) => (
             <CustomRoute key={key} {...route} />
           ))}
