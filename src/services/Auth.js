@@ -18,7 +18,7 @@ const Auth = {
     ? client.authenticate({strategy: 'local', login, password})
     : client.authenticate(),
 
-  singOut: () => client.logout()
+  logout: () => client.logout()
 };
 
 export default Auth;

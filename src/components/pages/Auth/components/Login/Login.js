@@ -1,58 +1,67 @@
 import React from 'react';
-import {Button} from 'forms';
-import {Loader} from 'molecules';
-import PropTypes from 'prop-types';
-import {EventsStore} from 'stores';
+import {observer} from 'mobx-react';
+import {Auth, Users} from 'services';
 import styled from 'styled-components';
-import {getParams, history} from 'utils';
 import {withRouter} from 'react-router-dom';
-import {observer, Provider} from 'mobx-react';
-
-const Wrapper = styled.div``;
 
 @withRouter
 @observer
-class Login extends React.Component {
-  static propTypes = {
-    className: PropTypes.string
-  };
+class Login extends React.Component {  constructor(props) {
+  super(props);
+  this.state = {};
+}
 
-  static defaultProps = {
-    className: ''
-  };
-
-  onClose = () => {
-    history.push('/events');
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.eventsStore = EventsStore.create();
+  updateField(name, ev) {
+    this.setState({ [name]: ev.target.value });
   }
 
-  componentWillMount() {
-    this.eventsStore.get(getParams(this).id);
+  login() {
+    const { email, password } = this.state;
+
+    return Auth.authenticate({
+      strategy: 'local',
+      email, password
+    }).catch(error => this.setState({ error }));
   }
+
+  registration() {
+    const { email, password } = this.state;
+
+    return Users.create({ email, password })
+      .then(() => this.login());
+  }
+
 
   render() {
-    const {...rest} = this.props;
-    const {eventsStore, onClose} = this;
+    return <main className="login container">
+      <div className="row">
+        <div className="col-12 col-6-tablet push-3-tablet text-center heading">
+          <h1 className="font-100">Log in or signup</h1>
+          <p>{this.state.error && this.state.error.message}</p>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-12 col-6-tablet push-3-tablet col-4-desktop push-4-desktop">
+          <form className="form">
+            <fieldset>
+              <input className="block" type="email" name="email" placeholder="email" onChange={ev => this.updateField('email', ev)} />
+            </fieldset>
 
-    return (
-      <Provider>
-        <Wrapper {...rest}>
-          <div>EventView</div>
+            <fieldset>
+              <input className="block" type="password" name="password" placeholder="password" onChange={ev => this.updateField('password', ev)} />
+            </fieldset>
 
-          <Button onClick={onClose}>Close</Button>
+            <button type="button" className="button button-primary block signup" onClick={() => this.login()}>
+              Log in
+            </button>
 
-          <Loader store={eventsStore}>
-          </Loader>
-
-          <Button onClick={onClose}>Close</Button>
-        </Wrapper>
-      </Provider>
-    );
+            <button type="button" className="button button-primary block signup" onClick={() => this.registration()}>
+              Signup
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>;
   }
 }
 
