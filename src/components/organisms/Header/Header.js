@@ -8,6 +8,17 @@ import { flexCenterBetween, flexCenter } from 'theme/mixins';
 
 import { UserBar } from './components';
 
+const items = [
+  {
+    to: '/users',
+    title: 'Users',
+  },
+  {
+    to: '/events',
+    title: 'Events',
+  }
+];
+
 const Wrapper = styled.div`
   height: 72px;
   background: #9cb4ca;
@@ -43,6 +54,7 @@ class Header extends React.PureComponent {
 
   static defaultProps = {
     className: '',
+    menuItems: [],
     user: {
       avatar: '',
       name: ''
@@ -61,7 +73,7 @@ class Header extends React.PureComponent {
             </NavLink>
           </LogoWrapper>
 
-          <Menu items={menuItems} />
+          <Menu items={[...menuItems, ...items]} />
         </InnerWrapper>
 
         <UserBar {...user} />

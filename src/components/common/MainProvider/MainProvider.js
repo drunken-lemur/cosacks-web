@@ -9,24 +9,27 @@ import {createGlobalStyle, ThemeProvider} from 'styled-components';
 import theme from 'theme';
 import globalCss from 'theme/global.css';
 
-import AuthStore from 'stores/AuthStore';
+import AuthStore from 'stores/auth/AuthStore';
 
 const GlobalStyle = createGlobalStyle`
   ${reset};
   ${globalCss};
 `;
 
-const stores = {
-  authStore: AuthStore.create()
-};
-
 class MainProvider extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.authStore = AuthStore.create()
+  }
+
   render() {
+    const {authStore} = this;
     const {children} = this.props;
 
     return (
       <Router history={history}>
-        <Provider {...stores}>
+        <Provider authStore={authStore}>
           <ThemeProvider theme={theme}>
             <ApplyTheme theme={theme}>
               <>

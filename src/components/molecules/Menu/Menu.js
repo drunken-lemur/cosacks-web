@@ -13,11 +13,11 @@ const Wrapper = styled.div`
 const Item = styled(NavLink)`
   color: #fff;
   width: 142px;
-  height: 71px;
+  height: 72px;
   ${flexCenter()};
   cursor: pointer;
   text-decoration: none;
-  ${typography(14, 17, 500)};
+  ${typography(14, 18, 500)};
 
   &:hover {
     background: rgba(255, 255, 255, 0.1);
@@ -26,14 +26,6 @@ const Item = styled(NavLink)`
   &.active {
     background: rgba(255, 255, 255, 0.15);
   }
-
-  ${p =>
-    p.isActive === true ||
-    (p.isActive.apply &&
-      p.isActive() &&
-      css`
-        background: rgba(255, 255, 255, 0.15);
-      `)};
 `;
 
 class Menu extends React.PureComponent {
@@ -57,7 +49,7 @@ class Menu extends React.PureComponent {
     return (
       <Wrapper {...rest}>
         {items.map(({ title, isActive, to = '#', ...rest }, key) => (
-          <Item key={key} {...rest} to={to} isActive={() => isActive}>
+          <Item key={key} {...rest} to={to}>
             {title}
           </Item>
         ))}

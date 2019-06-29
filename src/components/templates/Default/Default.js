@@ -36,6 +36,7 @@ const HeaderWrapper = styled.div`
 `;
 
 const BodyWrapper = styled.div`
+  padding-top: 32px;
   width: 960px;
   margin: 0 auto;
 `;

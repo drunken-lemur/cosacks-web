@@ -1,16 +1,28 @@
 import React from 'react';
 import {reaction} from 'mobx';
-import {observer} from 'mobx-react';
-import {AuthStore, MessagesStore, UsersStore} from 'stores';
+import PropTypes from 'prop-types';
+import {inject, observer} from 'mobx-react';
+import {MessagesStore, UsersStore} from 'stores';
 
 import Chat from './chat';
+import {setDisplayName} from 'recompose';
+import {Redirect, withRouter} from 'react-router';
+import {pathOr} from 'ramda';
 
+@setDisplayName('Login')
+@withRouter
+@inject('authStore')
 @observer
-class Application extends React.Component {
+class Login extends React.Component {
+  static propTypes = {
+    authStore: PropTypes.object.isRequired
+  };
+
   login = () => {
+    const {authStore} = this.props;
     const {email, password} = this.state;
 
-    return this.authStore.login({email, password});
+    return authStore.login({email, password});
   };
 
   signup = () => {
@@ -21,7 +33,9 @@ class Application extends React.Component {
   };
 
   onLogout = () => {
-    this.authStore.logout();
+    const {authStore} = this.props;
+
+    authStore.logout();
   };
 
   fetchAll = () => {
@@ -43,7 +57,6 @@ class Application extends React.Component {
     super(props);
 
     this.state = {};
-    this.authStore = AuthStore.create();
     this.usersStore = UsersStore.create();
     this.messagesStore = MessagesStore.create();
   }
@@ -53,13 +66,12 @@ class Application extends React.Component {
   }
 
   componentDidMount() {
+    const {authStore} = this.props;
+
     this.reactions = [
       reaction(
-        () => this.authStore.user,
-        user => {
-          console.log('reaction', {user});
-          user && this.fetchAll();
-        }
+        () => authStore.user,
+        user => user && this.fetchAll()
       )
     ];
   }
@@ -68,9 +80,14 @@ class Application extends React.Component {
     this.reactions.map(reaction => reaction());
   }
 
-
   render() {
-    const {authStore, usersStore, messagesStore} = this;
+    const {authStore, location} = this.props;
+    const {usersStore, messagesStore} = this;
+    const fromUrl = pathOr('/', ['state', 'from'], location);
+
+    if (authStore.isAuthenticated) {
+      return <Redirect to={fromUrl}/>;
+    }
 
     if (authStore.isPending) {
       return (
@@ -120,4 +137,4 @@ class Application extends React.Component {
   }
 }
 
-export default Application;
+export default Login;
