@@ -5,15 +5,7 @@
     ["@babel/plugin-proposal-class-properties", { "loose": true }],
     ["module-resolver", {
       "root": ["./"],
-      "alias": {
-        "Modules": "./src/components/modules",
-        "Stores": "./src/stores/",
-        "Forms": "./src/forms/",
-        "Pages": "./src/pages/",
-        "Utils": "./src/utils/",
-        "Connection": "./src/connection",
-        "Components": "./src/components/"
-      }
+      "alias": {}
     }]
   ],
 

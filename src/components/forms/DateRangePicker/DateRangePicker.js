@@ -1,60 +1,36 @@
-import React, { Component } from 'react';
-import { observable, computed } from "mobx";
-import { observer } from "mobx-react";
+import React from 'react';
+import moment from 'utils/moment';
 import PropTypes from 'prop-types';
+import {observer} from 'mobx-react';
 import styled from 'styled-components';
-import moment from "Utils/moment";
+import {computed, observable} from 'mobx';
 
-import { Calendar as CalendarIcon } from 'icons';
-import { Input } from 'forms';
-import { Dropdown } from 'molecules';
-import { Calendar } from 'organisms';
+import {Calendar as CalendarIcon} from 'icons';
+import {Input} from 'forms';
+import {Dropdown} from 'molecules';
+import {Calendar} from 'organisms';
 
 const Wrapper = styled.div``;
 
 @observer
-class DateRangePicker extends Component {
-  @observable isOpened = false
+class DateRangePicker extends React.Component {
+  @observable isOpened = false;
 
-  @observable today = moment().toDate()
-
-  @computed get rangeValue() {
-    const { checkIn, checkOut } = this.props;
-
-    return [
-      moment(checkIn.value).toDate(),
-      moment(checkOut.value).toDate()
-    ]
-  }
-
-  @computed get rangeString() {
-    const { checkIn, checkOut, format } = this.props;
-
-    return [checkIn, checkOut]
-      .map(date => moment(date.value))
-      .filter(date => date.isValid())
-      .map(date => date.format(format))
-      .join(' – ')
-  }
-
+  @observable today = moment().toDate();
   setCheckIn = (value) => {
-    const { checkIn } = this.props;
-    !!value ? checkIn.set(value) : checkIn.clear()
-  }
-
+    const {checkIn} = this.props;
+    !!value ? checkIn.set(value) : checkIn.clear();
+  };
   setCheckOut = (value) => {
-    const { checkOut } = this.props;
-    !!value ? checkOut.set(value) : checkOut.clear()
-  }
-
+    const {checkOut} = this.props;
+    !!value ? checkOut.set(value) : checkOut.clear();
+  };
   open = () => {
-    this.isOpened = true
+    this.isOpened = true;
   };
-
   close = () => {
-    this.isOpened = false
+    this.isOpened = false;
   };
-
   onChange = (_, value) => {
     const [from, to] = value;
 
@@ -63,14 +39,12 @@ class DateRangePicker extends Component {
 
     if (from && to) this.close();
   };
-
   onRequestClose = () => {
     if (!this.preventClose)
-      this.close()
+      this.close();
 
-    this.preventClose = false
+    this.preventClose = false;
   };
-
   renderAnchor = () => {
     return <Input
       value={this.rangeString}
@@ -83,12 +57,31 @@ class DateRangePicker extends Component {
           this.preventClose = true;
         }
       }}
-      iconLeft={<CalendarIcon />}
+      iconLeft={<CalendarIcon/>}
     />;
   };
 
+  @computed get rangeValue() {
+    const {checkIn, checkOut} = this.props;
+
+    return [
+      moment(checkIn.value).toDate(),
+      moment(checkOut.value).toDate()
+    ];
+  }
+
+  @computed get rangeString() {
+    const {checkIn, checkOut, format} = this.props;
+
+    return [checkIn, checkOut]
+      .map(date => moment(date.value))
+      .filter(date => date.isValid())
+      .map(date => date.format(format))
+      .join(' – ');
+  }
+
   render() {
-    const { checkIn, checkOut, ...rest } = this.props;
+    const {checkIn, checkOut, ...rest} = this.props;
 
     return (
       <Wrapper {...rest}>

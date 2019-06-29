@@ -66,4 +66,4 @@ export const promiseLogger = name => res => {
   console.log(name, res);
 
   return res;
-}
+};

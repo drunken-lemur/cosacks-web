@@ -1,11 +1,11 @@
-import { Form } from 'mobx-react-form';
+import {Form} from 'mobx-react-form';
 import dvr from 'mobx-react-form/lib/validators/DVR';
 import validatorjs from 'validatorjs';
 
 // Phone validator
 const phoneChecker = (value, requirement, attribute) => {
-  return value.replace(/(\s|\W)/gi, '').match(/^\d{11}$/)
-}
+  return value.replace(/(\s|\W)/gi, '').match(/^\d{11}$/);
+};
 
 validatorjs.register(
   'phone',
@@ -15,8 +15,8 @@ validatorjs.register(
 
 // FullName validator
 const fullNameChecker = (value, requirement, attribute) => {
-  return value.split(' ').length === 3
-}
+  return value.split(' ').length === 3;
+};
 
 validatorjs.register(
   'fullName',
@@ -37,7 +37,7 @@ class BaseState extends Form {
   plugins() {
     return {
       dvr: dvr(validatorjs)
-    }
+    };
   }
 }
 

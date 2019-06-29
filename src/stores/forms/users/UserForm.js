@@ -1,4 +1,4 @@
-import BaseState from 'Forms/BaseState';
+import BaseState from '../base/BaseState';
 
 const fields = [
   'email',
