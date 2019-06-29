@@ -13,7 +13,7 @@ class CustomRoute extends React.Component {
       return (
         <Redirect
           to={{
-            pathname: '/login',
+            pathname: '/auth/login',
             state: {
               from: this.props.location
             }

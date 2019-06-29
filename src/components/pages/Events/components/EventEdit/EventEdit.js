@@ -2,7 +2,6 @@ import React from 'react';
 import {Button} from 'forms';
 import {reaction} from 'mobx';
 import {Loader} from 'molecules';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {getParams, history} from 'utils';
 import {withRouter} from 'react-router-dom';
@@ -18,14 +17,6 @@ const Wrapper = styled.div``;
 @withRouter
 @observer
 class EventEdit extends React.Component {
-  static propTypes = {
-    className: PropTypes.string,
-  };
-
-  static defaultProps = {
-    className: '',
-  };
-
   onSuccess = form => {
     const data = form.values();
     const {eventsStore, onClose} = this;

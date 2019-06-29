@@ -16,7 +16,6 @@ const routes = [
   }
 ];
 
-// const Auth = () => 'Auth';
-const Auth = () => <PageGroup {...routes}/>;
+const Auth = () => <PageGroup routes={routes}/>;
 
 export default Auth;
