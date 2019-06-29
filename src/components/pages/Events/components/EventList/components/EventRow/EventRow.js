@@ -48,17 +48,19 @@ class EventRow extends React.PureComponent {
     return (
       <Wrapper {...rest}>
         <div>
-          <NavLink to={`/events/${_id}`}>
-            <strong>Name: </strong>{name}
-          </NavLink>
-        </div>
+          <div>
+            <NavLink to={`/events/${_id}`}>
+              <strong>Name: </strong>{name}
+            </NavLink>
+          </div>
 
-        <div>
-          <strong>Description: </strong>{description}
-        </div>
+          <div>
+            <strong>Description: </strong>{description}
+          </div>
 
-        <div>
-          <strong>Start: </strong>{start} - <strong>End: </strong>{end}
+          <div>
+            <strong>Start: </strong>{start} - <strong>End: </strong>{end}
+          </div>
         </div>
 
         <Button onClick={onView(_id)}>View</Button>

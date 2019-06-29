@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {FieldGroup, Form, Input} from 'forms';
 import {inject, observer} from 'mobx-react';
+import {FieldGroup, Form, Input} from 'forms';
 
 @inject('eventsForm')
 @observer
 class EventForm extends React.Component {
   static propTypes = {
-    onClose: PropTypes.func,
     className: PropTypes.string,
     eventsForm: PropTypes.object.isRequired,
   };

@@ -1,10 +1,11 @@
 import React from 'react';
-import {history} from 'utils';
+import {Button} from 'forms';
 import {reaction} from 'mobx';
 import {Loader} from 'molecules';
-import PropTypes from 'prop-types';
-import {observer} from 'mobx-react';
 import styled from 'styled-components';
+import {getParams, history} from 'utils';
+import {withRouter} from 'react-router-dom';
+import {observer, Provider} from 'mobx-react';
 
 import {UsersStore} from 'stores/users';
 import UserFormState from 'stores/forms/users/UserForm';
@@ -13,25 +14,27 @@ import {UserForm} from '..';
 
 const Wrapper = styled.div``;
 
+@withRouter
 @observer
 class UserEdit extends React.Component {
-  static propTypes = {
-    className: PropTypes.string
-  };
-
-  static defaultProps = {
-    className: ''
-  };
-
   onSuccess = form => {
-    const {usersStore} = this;
-    const {match} = this.props;
-    const {id} = match.params;
-
     const values = form.values();
+    const {usersStore, onClose} = this;
 
-    usersStore.update(id, values)
-      .then(() => history.push(`/users`));
+    usersStore.update(getParams(this).id, values)
+      .then(onClose);
+  };
+
+  onClose = () => {
+    history.push('/users');
+  };
+
+  onError = form => {
+    console.log('onError', {form});
+  };
+
+  onSubmit = () => {
+    this.userForm.submit();
   };
 
   constructor(props) {
@@ -44,7 +47,6 @@ class UserEdit extends React.Component {
   }
 
   componentDidMount() {
-    const {match} = this.props;
     const {userForm, usersStore} = this;
 
     this.reactions = [
@@ -54,7 +56,7 @@ class UserEdit extends React.Component {
       )
     ];
 
-    this.usersStore.get(match.params.id);
+    this.usersStore.get(getParams(this).id);
   }
 
   componentWillUnmount() {
@@ -63,16 +65,22 @@ class UserEdit extends React.Component {
 
   render() {
     const {...rest} = this.props;
-    const {userForm, usersStore} = this;
+    const {userForm, usersStore, onSubmit, onClose} = this;
 
     return (
-      <Wrapper {...rest}>
-        <div>UserEdit</div>
+      <Provider userForm={userForm}>
+        <Wrapper {...rest}>
+          <div>UserEdit</div>
 
-        <Loader loading={usersStore.isPending}>
-          <UserForm form={userForm}/>
-        </Loader>
-      </Wrapper>
+          <Loader store={usersStore}>
+            <UserForm/>
+
+            <Button onClick={onSubmit}>Save</Button>
+
+            <Button onClick={onClose}>Close</Button>
+          </Loader>
+        </Wrapper>
+      </Provider>
     );
   }
 }

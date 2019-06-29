@@ -1,11 +1,12 @@
 import React from 'react';
+import {Button} from 'forms';
 import {Loader} from 'molecules';
+import {UsersStore} from 'stores';
 import PropTypes from 'prop-types';
-import {observer} from 'mobx-react';
 import styled from 'styled-components';
-import {withRouter} from 'react-router';
-
-import {UsersStore} from 'stores/users';
+import {getParams, history} from 'utils';
+import {withRouter} from 'react-router-dom';
+import {observer, Provider} from 'mobx-react';
 
 import {UserCard} from './components';
 
@@ -22,6 +23,10 @@ class UserView extends React.Component {
     className: ''
   };
 
+  onClose = () => {
+    history.push('/users');
+  };
+
   constructor(props) {
     super(props);
 
@@ -29,23 +34,27 @@ class UserView extends React.Component {
   }
 
   componentDidMount() {
-    const {match} = this.props;
-
-    this.usersStore.get(match.params.id);
+    this.usersStore.get(getParams(this).id);
   }
 
   render() {
-    const {usersStore} = this;
     const {...rest} = this.props;
+    const {usersStore, onClose} = this;
 
     return (
-      <Wrapper {...rest}>
-        <div>ViewUser</div>
+      <Provider>
+        <Wrapper {...rest}>
+          <div>UserView</div>
 
-        <Loader loading={usersStore.isPending}>
-          <UserCard {...usersStore.data}/>
-        </Loader>
-      </Wrapper>
+          <Button onClick={onClose}>Close</Button>
+
+          <Loader store={usersStore}>
+            <UserCard {...usersStore.data}/>
+          </Loader>
+
+          <Button onClick={onClose}>Close</Button>
+        </Wrapper>
+      </Provider>
     );
   }
 }

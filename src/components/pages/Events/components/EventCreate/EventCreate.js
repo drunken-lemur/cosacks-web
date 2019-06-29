@@ -1,9 +1,9 @@
 import React from 'react';
+import {Button} from 'forms';
 import {history} from 'utils';
 import {Loader} from 'molecules';
-import {Button, Input} from 'forms';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {withRouter} from 'react-router-dom';
 import {observer, Provider} from 'mobx-react';
 
 import {EventsStore} from 'stores';
@@ -11,27 +11,27 @@ import EventFormState from 'stores/forms/events/EventForm';
 
 import {EventForm} from '..';
 
-const Wrapper = styled.div`
-  ${Button},
-  ${Input} {
-    margin: 8px;
-  }
-`;
+const Wrapper = styled.div``;
 
-@withRouter
 @observer
 class EventCreate extends React.Component {
+  static propTypes = {
+    className: PropTypes.string,
+  };
+
+  static defaultProps = {
+    className: '',
+  };
+
   onSuccess = form => {
-    const {eventsStore} = this;
     const values = form.values();
+    const {eventsStore, onClose} = this;
 
     eventsStore.create(values)
-      .then(() => history.push('/events'));
+      .then(onClose);
   };
 
   onClose = () => {
-    const {history} = this.props;
-
     history.push('/events');
   };
 
@@ -57,12 +57,12 @@ class EventCreate extends React.Component {
     const {eventsForm, eventsStore, onSubmit, onClose} = this;
 
     return (
-      <Provider {...{eventsForm}}>
+      <Provider eventsForm={eventsForm}>
         <Wrapper {...rest}>
           <div>EventCreate</div>
 
           <Loader store={eventsStore}>
-            <EventForm/>
+            <EventForm onSubmit={onSubmit}/>
 
             <Button onClick={onSubmit}>Create</Button>
 

@@ -1,19 +1,28 @@
 import React from 'react';
 import {Button} from 'forms';
 import {Loader} from 'molecules';
+import PropTypes from 'prop-types';
 import {EventsStore} from 'stores';
 import styled from 'styled-components';
 import {getParams, history} from 'utils';
 import {withRouter} from 'react-router-dom';
 import {observer, Provider} from 'mobx-react';
 
-import {EventCard} from '..';
+import {EventCard} from './components';
 
 const Wrapper = styled.div``;
 
 @withRouter
 @observer
 class EventView extends React.Component {
+  static propTypes = {
+    className: PropTypes.string
+  };
+
+  static defaultProps = {
+    className: ''
+  };
+
   onClose = () => {
     history.push('/events');
   };
@@ -35,7 +44,7 @@ class EventView extends React.Component {
     return (
       <Provider>
         <Wrapper {...rest}>
-          <div>Event</div>
+          <div>EventView</div>
 
           <Button onClick={onClose}>Close</Button>
 

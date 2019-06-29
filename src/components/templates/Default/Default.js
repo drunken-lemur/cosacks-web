@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Button, Input} from 'forms';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -7,6 +8,27 @@ const Wrapper = styled.div`
   height: 100%;
   overflow: auto;
   background: #f6f8fb;
+  
+  
+  article {
+    padding: 16px;
+    color: #8B9898;
+    border: 1px dotted #4c4c4c;
+  }
+  
+  strong {
+    color: #000;
+  }
+  
+  ${Input} {
+    background: #fff;
+  }
+  
+  ${Input},
+  ${Button},
+   article {
+    margin: 8px;
+  }
 `;
 
 const HeaderWrapper = styled.div`
@@ -36,7 +58,7 @@ class Default extends React.PureComponent {
   };
 
   render() {
-    const { header, body, footer, ...rest } = this.props;
+    const {header, body, footer, ...rest} = this.props;
 
     return (
       <Wrapper {...rest}>

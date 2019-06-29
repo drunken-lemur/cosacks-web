@@ -1,10 +1,11 @@
 import React from 'react';
-import {Loader} from 'molecules';
+import {Button} from 'forms';
+import {history} from 'utils';
+import {UsersStore} from 'stores';
 import PropTypes from 'prop-types';
-import {observer} from 'mobx-react';
 import styled from 'styled-components';
-
-import {UsersStore} from 'stores/users';
+import {List, Loader} from 'molecules';
+import {observer, Provider} from 'mobx-react';
 
 import {UserRow} from './components';
 
@@ -13,11 +14,30 @@ const Wrapper = styled.div``;
 @observer
 class UserList extends React.Component {
   static propTypes = {
-    className: PropTypes.string
+    className: PropTypes.string,
   };
 
   static defaultProps = {
-    className: ''
+    className: '',
+  };
+
+  onCreate = () => {
+    history.push('/users/create');
+  };
+
+  onView = id => () => {
+    history.push(`/users/${id}`);
+  };
+
+  onEdit = id => () => {
+    history.push(`/users/${id}/edit`);
+  };
+
+  onDelete = id => () => {
+    const {usersStore} = this;
+
+    usersStore.delete(id)
+      .then(() => usersStore.find());
   };
 
   constructor(props) {
@@ -31,19 +51,32 @@ class UserList extends React.Component {
   }
 
   render() {
-    const {usersStore} = this;
     const {...rest} = this.props;
-    
-    return (
-      <Wrapper {...rest}>
-        <div>UserList</div>
+    const {usersStore, onCreate, onView, onEdit, onDelete} = this;
 
-        <Loader store={usersStore}>
-          {usersStore.list.map(user => (
-            <UserRow key={user.id} {...user}/>
-          ))}
-        </Loader>
-      </Wrapper>
+    const users = usersStore.list.toJSON();
+
+
+    return (
+      <Provider>
+        <Wrapper {...rest}>
+          <div>UserList</div>
+
+          <Button onClick={onCreate}>Create</Button>
+
+          <Loader store={usersStore}>
+            <List
+              list={users}
+              onView={onView}
+              onEdit={onEdit}
+              onDelete={onDelete}
+              component={UserRow}
+            />
+          </Loader>
+
+          <Button onClick={onCreate}>Create</Button>
+        </Wrapper>
+      </Provider>
     );
   }
 }

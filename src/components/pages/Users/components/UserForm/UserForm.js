@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {observer} from 'mobx-react';
 import styled from 'styled-components';
+import {inject, observer} from 'mobx-react';
 import {FieldGroup, Form, Input} from 'forms';
 
+@inject('userForm')
 @observer
-class UserForm extends React.PureComponent {
+class UserForm extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     userForm: PropTypes.object.isRequired

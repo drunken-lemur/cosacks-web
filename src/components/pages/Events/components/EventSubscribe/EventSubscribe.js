@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button} from 'forms';
 import {EventsStore} from 'stores';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {getParams, history} from 'utils';
 import {withRouter} from 'react-router-dom';
@@ -11,6 +12,14 @@ const Wrapper = styled.div``;
 @withRouter
 @observer
 class EventSubscribe extends React.Component {
+  static propTypes = {
+    className: PropTypes.string,
+  };
+
+  static defaultProps = {
+    className: '',
+  };
+
   onClose = () => {
     history.push('/events');
   };

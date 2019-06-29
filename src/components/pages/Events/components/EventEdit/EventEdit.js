@@ -1,9 +1,10 @@
 import React from 'react';
+import {Button} from 'forms';
 import {reaction} from 'mobx';
 import {Loader} from 'molecules';
-import {Button, Input} from 'forms';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {getParams, history} from 'utils'
+import {getParams, history} from 'utils';
 import {withRouter} from 'react-router-dom';
 import {observer, Provider} from 'mobx-react';
 
@@ -12,22 +13,25 @@ import EventFormState from 'stores/forms/events/EventForm';
 
 import {EventForm} from '..';
 
-const Wrapper = styled.div`
-  ${Button},
-  ${Input} {
-    margin: 8px;
-  }
-`;
+const Wrapper = styled.div``;
 
 @withRouter
 @observer
 class EventEdit extends React.Component {
+  static propTypes = {
+    className: PropTypes.string,
+  };
+
+  static defaultProps = {
+    className: '',
+  };
+
   onSuccess = form => {
-    const {eventsStore} = this;
     const data = form.values();
+    const {eventsStore, onClose} = this;
 
     eventsStore.update(getParams(this).id, data)
-      .then(() => history.push('/events'));
+      .then(onClose);
   };
 
   onClose = () => {
@@ -57,9 +61,7 @@ class EventEdit extends React.Component {
     this.reactions = [
       reaction(
         () => eventsStore.data,
-        () => {
-          eventsForm.set('value', eventsStore.data.toJSON());
-        }
+        event => eventsForm.set('value', event.toJSON())
       )
     ];
 
@@ -75,7 +77,7 @@ class EventEdit extends React.Component {
     const {eventsForm, eventsStore, onSubmit, onClose} = this;
 
     return (
-      <Provider {...{eventsForm}}>
+      <Provider eventsForm={eventsForm}>
         <Wrapper {...rest}>
           <div>EventEdit</div>
 

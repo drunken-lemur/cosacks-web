@@ -5,30 +5,12 @@ import PropTypes from 'prop-types';
 import {EventsStore} from 'stores';
 import styled from 'styled-components';
 import {List, Loader} from 'molecules';
-import {withRouter} from 'react-router-dom';
 import {observer, Provider} from 'mobx-react';
 
-import {EventRow} from '..';
+import {EventRow} from './components';
 
-const Wrapper = styled.div`
-  
-  article {
-    padding: 16px;
-    color: #8B9898;
-    border: 1px dotted #4c4c4c;
-  }
-  
-  strong {
-    color: #000;
-  }
-  
-  ${Button},
-   article {
-    margin: 8px;
-  }
-`;
+const Wrapper = styled.div``;
 
-@withRouter
 @observer
 class EventList extends React.Component {
   static propTypes = {
@@ -64,7 +46,7 @@ class EventList extends React.Component {
     this.eventsStore = EventsStore.create();
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.eventsStore.find();
   }
 
