@@ -1,79 +1,122 @@
-import React, { Component } from 'react';
-import Log from './log';
-import Chat from './chat';
-import client from './feathers';
+import React from 'react';
+import {reaction} from 'mobx';
+import {observer} from 'mobx-react';
+import {AuthStore, MessagesStore, UsersStore} from 'stores';
 
-class Application extends Component {
+import Chat from './chat';
+
+@observer
+class Application extends React.Component {
+  login = () => {
+    const {email, password} = this.state;
+
+    return this.authStore.login({email, password});
+  };
+
+  signup = () => {
+    const {email, password} = this.state;
+
+    this.usersStore.create({email, password})
+      .then(() => this.login());
+  };
+
+  onLogout = () => {
+    this.authStore.logout();
+  };
+
+  fetchAll = () => {
+    const {messagesStore, usersStore} = this;
+
+    Promise.all([
+      usersStore.find(),
+
+      messagesStore.find({
+        query: {
+          $sort: {createdAt: -1},
+          $limit: 25
+        }
+      })
+    ]);
+  };
+
   constructor(props) {
     super(props);
 
     this.state = {};
+    this.authStore = AuthStore.create();
+    this.usersStore = UsersStore.create();
+    this.messagesStore = MessagesStore.create();
+  }
+
+  updateField(name, ev) {
+    this.setState({[name]: ev.target.value});
   }
 
   componentDidMount() {
-    const messages = client.service('messages');
-    const users = client.service('users');
-
-    // Try to authenticate with the JWT stored in localStorage
-    client.authenticate().catch(() => this.setState({ login: null }));
-
-    // On successfull login
-    client.on('authenticated', login => {
-      // Get all users and messages
-      Promise.all([
-        messages.find({
-          query: {
-            $sort: { createdAt: -1 },
-            $limit: 25
-          }
-        }),
-        users.find()
-      ]).then(([messagePage, userPage]) => {
-        // We want the latest messages but in the reversed order
-        const messages = messagePage.data.reverse();
-        const users = userPage.data;
-
-        // Once both return, update the state
-        this.setState({ login, messages, users });
-      });
-    });
-
-    // On logout reset all all local state (which will then show the login screen)
-    client.on('logout', () =>
-      this.setState({
-        login: null,
-        messages: null,
-        users: null
-      })
-    );
-
-    // Add new messages to the message list
-    messages.on('created', message =>
-      this.setState({
-        messages: this.state.messages.concat(message)
-      })
-    );
-
-    // Add new users to the user list
-    users.on('created', user =>
-      this.setState({
-        users: this.state.users.concat(user)
-      })
-    );
+    this.reactions = [
+      reaction(
+        () => this.authStore.user,
+        user => {
+          console.log('reaction', {user});
+          user && this.fetchAll();
+        }
+      )
+    ];
   }
 
+  componentWillUnmount() {
+    this.reactions.map(reaction => reaction());
+  }
+
+
   render() {
-    if (this.state.login === undefined) {
+    const {authStore, usersStore, messagesStore} = this;
+
+    if (authStore.isPending) {
       return (
         <main className="container text-center">
           <h1>Loading...</h1>
         </main>
       );
-    } else if (this.state.login) {
-      return <Chat messages={this.state.messages} users={this.state.users} />;
+    } else if (authStore.isAuthenticated) {
+      return (
+        <div>
+          <Chat onLogout={this.onLogout} messages={messagesStore.list.toJSON()} users={usersStore.list.toJSON()}/>
+        </div>
+      );
     }
 
-    return <Log />;
+    return <main className="login container">
+      <div className="row">
+        <div className="col-12 col-6-tablet push-3-tablet text-center heading">
+          <h1 className="font-100">Log in or signup</h1>
+          <p>{authStore.error && authStore.error.message}</p>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-12 col-6-tablet push-3-tablet col-4-desktop push-4-desktop">
+          <form className="form">
+            <fieldset>
+              <input className="block" type="email" name="email" placeholder="email"
+                     onChange={ev => this.updateField('email', ev)}/>
+            </fieldset>
+
+            <fieldset>
+              <input className="block" type="password" name="password" placeholder="password"
+                     onChange={ev => this.updateField('password', ev)}/>
+            </fieldset>
+
+            <button type="button" className="button button-primary block signup" onClick={() => this.login()}>
+              Log in
+            </button>
+
+            <button type="button" className="button button-primary block signup" onClick={() => this.signup()}>
+              Signup
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>;
   }
 }
 

@@ -1,13 +1,13 @@
 import Qs from 'qs';
-import { authStoreOld as authStore } from 'stores';
+import {authStoreOld as authStore} from 'stores';
 import superagent_ from 'superagent';
 import superagentPromise from 'superagent-promise';
 
 const API_ROOT = `http://82.202.198.194/api`;
 
-const { get, post, put, del } = superagentPromise(superagent_, global.Promise);
+const {get, post, put, del} = superagentPromise(superagent_, global.Promise);
 
-const serialize = params => Qs.stringify(params, { arrayFormat: 'brackets' });
+const serialize = params => Qs.stringify(params, {arrayFormat: 'brackets'});
 
 const tokenPlugin = req => {
   if (authStore.token) {

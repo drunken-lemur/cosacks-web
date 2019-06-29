@@ -1,12 +1,12 @@
-import { types } from 'mobx-state-tree';
-import { formatPrice } from 'utils';
+import {types} from 'mobx-state-tree';
+import {formatPrice} from 'utils';
 
 const Address = types.model({
   coordinates: types.array(types.number),
   location: types.string
 });
 
-const SubImage = types.model({ url: types.string });
+const SubImage = types.model({url: types.string});
 
 const Image = types.model({
   landscape_big: SubImage,

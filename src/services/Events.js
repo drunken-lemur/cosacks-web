@@ -1,4 +1,4 @@
-import {client} from 'utils';
+import client from './client';
 
 const Events = client.service('events');
 

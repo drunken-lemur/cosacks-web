@@ -1,8 +1,6 @@
-import Api from './Api';
-import Auth from './Auth';
-import Events from './Events';
-import Hotels from './Hotels';
-import Users from './Users';
+export {default as client} from './client';
 
-export {Api, Auth, Hotels, Events, Users};
-export default {Api, Auth, Hotels, Events, Users};
+export {default as Auth} from './Auth';
+export {default as Events} from './Events';
+export {default as Messages} from './Messages';
+export {default as Users} from './Users';

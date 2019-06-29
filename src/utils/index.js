@@ -3,7 +3,6 @@ import * as R from 'ramda';
 import {inject, observer} from 'mobx-react';
 import {branch, compose, mapProps} from 'recompose';
 
-export {default as client} from './client';
 export {default as history} from './history';
 
 export const noop = () => undefined;
@@ -62,3 +61,9 @@ export const injectMap = (store, propMap) => Component => {
 };
 
 export const getParams = R.pathOr(undefined, ['props', 'match', 'params']);
+
+export const promiseLogger = name => res => {
+  console.log(name, res);
+
+  return res;
+}

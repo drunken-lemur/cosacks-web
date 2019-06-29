@@ -1,24 +1,13 @@
-import {client} from 'utils';
-
-import Api from './Api';
+import client from './client';
 
 const Auth = {
-  login: (email, password, remember) =>
-    Api.post('/auth/sign_in ', {
-      user: {
-        email,
-        password,
-        remember
-      }
-    }),
+  authenticate: ({email, password} = {}) => {
+    return email && password
+      ? client.authenticate({strategy: 'local', email, password})
+      : client.authenticate();
+  },
 
-  currentUser: () => Api.get('/current_user'),
-
-  authenticate: ({login, password}) => login && password
-    ? client.authenticate({strategy: 'local', login, password})
-    : client.authenticate(),
-
-  logout: () => client.logout()
+  logout: client.logout,
 };
 
 export default Auth;

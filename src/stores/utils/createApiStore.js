@@ -8,7 +8,7 @@ export const Statuses = {
 
 const debug = false;
 
-const createApiStore = (model, service) => {
+const createApiStore = (model, service = {}, structure = {}) => {
   return types
     .model(model.name, {
       data: types.maybeNull(model),
@@ -17,7 +17,8 @@ const createApiStore = (model, service) => {
       total: types.maybeNull(types.number),
       limit: types.maybeNull(types.number),
       status: types.maybeNull(types.enumeration(Object.keys(Statuses))),
-      error: types.maybeNull(types.frozen())
+      error: types.maybeNull(types.frozen()),
+      ...structure
     })
     .views(self => ({
       get isDone() {
@@ -40,6 +41,7 @@ const createApiStore = (model, service) => {
       },
 
       setStatusPending() {
+        self.error = null;
         self.status = Statuses.pending;
 
         return self;
