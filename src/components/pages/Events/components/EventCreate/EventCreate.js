@@ -1,7 +1,6 @@
 import React from 'react';
 import {history} from 'utils';
 import {Loader} from 'molecules';
-import PropTypes from 'prop-types';
 import {Button, Input} from 'forms';
 import styled from 'styled-components';
 import {withRouter} from 'react-router-dom';
@@ -22,14 +21,6 @@ const Wrapper = styled.div`
 @withRouter
 @observer
 class EventCreate extends React.Component {
-  static propTypes = {
-    className: PropTypes.string,
-  };
-
-  static defaultProps = {
-    className: ''
-  };
-
   onSuccess = form => {
     const {eventsStore} = this;
     const values = form.values();

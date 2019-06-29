@@ -1,20 +1,20 @@
 import React from 'react';
 import {Button} from 'forms';
+import {history} from 'utils'
 import PropTypes from 'prop-types';
-import {List, Loader} from 'molecules';
+import {EventsStore} from 'stores';
 import styled from 'styled-components';
-import {observer, Provider} from 'mobx-react';
+import {List, Loader} from 'molecules';
 import {withRouter} from 'react-router-dom';
+import {observer, Provider} from 'mobx-react';
 
 import {EventRow} from '..';
 
-import {EventsStore} from 'stores';
-
 const Wrapper = styled.div`
-  color: #8B9898;
   
   article {
     padding: 16px;
+    color: #8B9898;
     border: 1px dotted #4c4c4c;
   }
   
@@ -28,7 +28,6 @@ const Wrapper = styled.div`
   }
 `;
 
-
 @withRouter
 @observer
 class EventList extends React.Component {
@@ -41,28 +40,21 @@ class EventList extends React.Component {
   };
 
   onCreate = () => {
-    const {history} = this.props;
-
-    history.replace('/events/create');
+    history.push('/events/create');
   };
 
   onView = id => () => {
-    const {history} = this.props;
-
-    history.replace(`/events/${id}`);
+    history.push(`/events/${id}`);
   };
 
   onEdit = id => () => {
-    const {history} = this.props;
-
-    history.replace(`/events/${id}/edit`);
+    history.push(`/events/${id}/edit`);
   };
 
   onDelete = id => () => {
     const {eventsStore} = this;
 
-    this.eventsStore
-      .delete(id)
+    eventsStore.delete(id)
       .then(() => eventsStore.find());
   };
 

@@ -60,3 +60,5 @@ export const injectMap = (store, propMap) => Component => {
     )
   )(Component);
 };
+
+export const getParams = R.pathOr(undefined, ['props', 'match', 'params']);

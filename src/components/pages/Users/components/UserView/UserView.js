@@ -3,6 +3,7 @@ import {Loader} from 'molecules';
 import PropTypes from 'prop-types';
 import {observer} from 'mobx-react';
 import styled from 'styled-components';
+import {withRouter} from 'react-router';
 
 import {UsersStore} from 'stores/users';
 
@@ -10,6 +11,7 @@ import {UserCard} from './components';
 
 const Wrapper = styled.div``;
 
+@withRouter
 @observer
 class UserView extends React.Component {
   static propTypes = {

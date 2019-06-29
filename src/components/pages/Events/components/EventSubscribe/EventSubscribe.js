@@ -1,9 +1,8 @@
 import React from 'react';
-import {Button} from 'forms/index';
-import PropTypes from 'prop-types';
-import {EventsStore} from 'stores/index';
+import {Button} from 'forms';
+import {EventsStore} from 'stores';
 import styled from 'styled-components';
-import Loader from 'rambler-ui/Loader';
+import {getParams, history} from 'utils';
 import {withRouter} from 'react-router-dom';
 import {observer, Provider} from 'mobx-react';
 
@@ -12,18 +11,8 @@ const Wrapper = styled.div``;
 @withRouter
 @observer
 class EventSubscribe extends React.Component {
-  static propTypes = {
-    className: PropTypes.string
-  };
-
-  static defaultProps = {
-    className: ''
-  };
-
   onClose = () => {
-    const {history} = this.props;
-
-    history.replace('/events');
+    history.push('/events');
   };
 
   constructor(props) {
@@ -33,39 +22,17 @@ class EventSubscribe extends React.Component {
   }
 
   componentWillMount() {
-    const {match} = this.props;
-
-    this.eventsStore.get(match.params.id);
+    this.eventsStore.get(getParams(this).id);
   }
 
   render() {
+    const {onClose} = this;
     const {...rest} = this.props;
-    const {eventsStore, onClose} = this;
-
-    const event = eventsStore.data || {};
 
     return (
       <Provider>
         <Wrapper {...rest}>
-          <div>Event</div>
-
-          <Button onClick={onClose}>Close</Button>
-
-          <Loader loading={eventsStore.isPending}>
-            <article key={event._id}>
-              <div>
-                <strong>Name:</strong> {event.name}
-              </div>
-
-              <div>
-                <strong>Description:</strong> {event.description}
-              </div>
-
-              <div>
-                <strong>Start:</strong> {event.start} - <strong>End:</strong> {event.end}
-              </div>
-            </article>
-          </Loader>
+          <div>EventSubscribe</div>
 
           <Button onClick={onClose}>Close</Button>
         </Wrapper>

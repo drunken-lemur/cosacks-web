@@ -21,7 +21,7 @@ const values = {};
 
 const output = {};
 
-class EditForm extends BaseState {
+class EventForm extends BaseState {
   constructor(hooks) {
     super({
       fields,
@@ -45,4 +45,4 @@ class EditForm extends BaseState {
   }
 }
 
-export default EditForm;
+export default EventForm;

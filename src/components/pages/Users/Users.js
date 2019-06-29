@@ -21,6 +21,6 @@ const routes = [{
   component: ViewPage
 }];
 
-const Users = () => <PageGroup {...{routes}}/>;
+const Users = () => <PageGroup routes={routes}/>;
 
 export default Users;

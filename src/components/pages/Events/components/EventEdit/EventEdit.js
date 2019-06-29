@@ -1,10 +1,9 @@
 import React from 'react';
 import {reaction} from 'mobx';
-import {history} from 'utils'
 import {Loader} from 'molecules';
-import PropTypes from 'prop-types';
 import {Button, Input} from 'forms';
 import styled from 'styled-components';
+import {getParams, history} from 'utils'
 import {withRouter} from 'react-router-dom';
 import {observer, Provider} from 'mobx-react';
 
@@ -23,20 +22,11 @@ const Wrapper = styled.div`
 @withRouter
 @observer
 class EventEdit extends React.Component {
-  static propTypes = {
-    className: PropTypes.string
-  };
-
-  static defaultProps = {
-    className: ''
-  };
-
   onSuccess = form => {
     const {eventsStore} = this;
-    const {match} = this.props;
     const data = form.values();
 
-    eventsStore.update(match.params.id, data)
+    eventsStore.update(getParams(this).id, data)
       .then(() => history.push('/events'));
   };
 
@@ -62,7 +52,6 @@ class EventEdit extends React.Component {
   }
 
   componentDidMount() {
-    const {match} = this.props;
     const {eventsStore, eventsForm} = this;
 
     this.reactions = [
@@ -74,7 +63,7 @@ class EventEdit extends React.Component {
       )
     ];
 
-    eventsStore.get(match.params.id);
+    eventsStore.get(getParams(this).id);
   }
 
   componentWillUnmount() {
