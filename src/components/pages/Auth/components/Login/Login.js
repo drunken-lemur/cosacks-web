@@ -1,68 +1,80 @@
-import React from 'react';
-import {observer} from 'mobx-react';
-import {Auth, Users} from 'services';
-import styled from 'styled-components';
-import {withRouter} from 'react-router-dom';
+import React, { Component } from 'react';
+import Log from './log';
+import Chat from './chat';
+import client from './feathers';
 
-@withRouter
-@observer
-class Login extends React.Component {  constructor(props) {
-  super(props);
-  this.state = {};
-}
+class Application extends Component {
+  constructor(props) {
+    super(props);
 
-  updateField(name, ev) {
-    this.setState({ [name]: ev.target.value });
+    this.state = {};
   }
 
-  login() {
-    const { email, password } = this.state;
+  componentDidMount() {
+    const messages = client.service('messages');
+    const users = client.service('users');
 
-    return Auth.authenticate({
-      strategy: 'local',
-      email, password
-    }).catch(error => this.setState({ error }));
+    // Try to authenticate with the JWT stored in localStorage
+    client.authenticate().catch(() => this.setState({ login: null }));
+
+    // On successfull login
+    client.on('authenticated', login => {
+      // Get all users and messages
+      Promise.all([
+        messages.find({
+          query: {
+            $sort: { createdAt: -1 },
+            $limit: 25
+          }
+        }),
+        users.find()
+      ]).then(([messagePage, userPage]) => {
+        // We want the latest messages but in the reversed order
+        const messages = messagePage.data.reverse();
+        const users = userPage.data;
+
+        // Once both return, update the state
+        this.setState({ login, messages, users });
+      });
+    });
+
+    // On logout reset all all local state (which will then show the login screen)
+    client.on('logout', () =>
+      this.setState({
+        login: null,
+        messages: null,
+        users: null
+      })
+    );
+
+    // Add new messages to the message list
+    messages.on('created', message =>
+      this.setState({
+        messages: this.state.messages.concat(message)
+      })
+    );
+
+    // Add new users to the user list
+    users.on('created', user =>
+      this.setState({
+        users: this.state.users.concat(user)
+      })
+    );
   }
-
-  registration() {
-    const { email, password } = this.state;
-
-    return Users.create({ email, password })
-      .then(() => this.login());
-  }
-
 
   render() {
-    return <main className="login container">
-      <div className="row">
-        <div className="col-12 col-6-tablet push-3-tablet text-center heading">
-          <h1 className="font-100">Log in or signup</h1>
-          <p>{this.state.error && this.state.error.message}</p>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-12 col-6-tablet push-3-tablet col-4-desktop push-4-desktop">
-          <form className="form">
-            <fieldset>
-              <input className="block" type="email" name="email" placeholder="email" onChange={ev => this.updateField('email', ev)} />
-            </fieldset>
+    if (this.state.login === undefined) {
+      return (
+        <main className="container text-center">
+          <h1>Loading...</h1>
+        </main>
+      );
+    } else if (this.state.login) {
+      return <Chat messages={this.state.messages} users={this.state.users} />;
+    }
 
-            <fieldset>
-              <input className="block" type="password" name="password" placeholder="password" onChange={ev => this.updateField('password', ev)} />
-            </fieldset>
-
-            <button type="button" className="button button-primary block signup" onClick={() => this.login()}>
-              Log in
-            </button>
-
-            <button type="button" className="button button-primary block signup" onClick={() => this.registration()}>
-              Signup
-            </button>
-          </form>
-        </div>
-      </div>
-    </main>;
+    return <Log />;
   }
 }
 
-export default styled(Login)``;
+export default Application;

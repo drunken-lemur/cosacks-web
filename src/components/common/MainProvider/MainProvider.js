@@ -9,7 +9,7 @@ import {createGlobalStyle, ThemeProvider} from 'styled-components';
 import theme from 'theme';
 import globalCss from 'theme/global.css';
 
-import AuthStore from 'Stores/AuthStore';
+import AuthStore from 'stores/AuthStore';
 
 const GlobalStyle = createGlobalStyle`
   ${reset};
