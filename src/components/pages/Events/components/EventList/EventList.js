@@ -1,12 +1,14 @@
 import React from 'react';
-import {Button} from 'forms/index';
+import {Button} from 'forms';
 import PropTypes from 'prop-types';
-import Loader from 'rambler-ui/Loader';
+import {List, Loader} from 'molecules';
 import styled from 'styled-components';
 import {observer, Provider} from 'mobx-react';
-import {NavLink, withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
-import {EventsStore} from 'stores/index';
+import {EventRow} from '..';
+
+import {EventsStore} from 'stores';
 
 const Wrapper = styled.div`
   color: #8B9898;
@@ -87,30 +89,14 @@ class EventList extends React.Component {
 
           <Button onClick={onCreate}>Create</Button>
 
-          <Loader loading={eventsStore.isPending}>
-            {events.map(event => (
-              <article key={event._id}>
-                <div>
-                  <NavLink to={`/events/${event._id}`}>
-                    <strong>Name:</strong> {event.name}
-                  </NavLink>
-                </div>
-
-                <div>
-                  <strong>Description:</strong> {event.description}
-                </div>
-
-                <div>
-                  <strong>Start:</strong> {event.start} - <strong>End:</strong> {event.end}
-                </div>
-
-                <Button onClick={onView(event._id)}>View</Button>
-
-                <Button onClick={onEdit(event._id)}>Edit</Button>
-
-                <Button onClick={onDelete(event._id)}>Delete</Button>
-              </article>
-            ))}
+          <Loader store={eventsStore}>
+            <List
+              list={events}
+              onView={onView}
+              onEdit={onEdit}
+              onDelete={onDelete}
+              component={EventRow}
+            />
           </Loader>
 
           <Button onClick={onCreate}>Create</Button>

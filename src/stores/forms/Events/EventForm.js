@@ -21,7 +21,7 @@ const values = {};
 
 const output = {};
 
-class CreateForm extends BaseState {
+class EventForm extends BaseState {
   constructor(hooks) {
     super({
       fields,
@@ -45,4 +45,4 @@ class CreateForm extends BaseState {
   }
 }
 
-export default CreateForm;
+export default EventForm;

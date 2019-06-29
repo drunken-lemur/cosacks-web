@@ -6,7 +6,7 @@ import {inject, observer} from 'mobx-react';
 
 @inject('form')
 @observer
-class FieldGroup extends React.PureComponent {
+class FieldGroup extends React.Component {
   static propTypes = {
     fields: PropTypes.object.isRequired
   };
@@ -17,7 +17,7 @@ class FieldGroup extends React.PureComponent {
     return !!fields && (
       <>
         {Object.keys(fields).map(name => (
-          <Field name={name} component={fields[name]}/>
+          <Field key={name} name={name} component={fields[name]}/>
         ))}
       </>
     );

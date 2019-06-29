@@ -1,16 +1,23 @@
 import React from 'react';
+import {history} from 'utils';
+import {Loader} from 'molecules';
 import PropTypes from 'prop-types';
+import {Button, Input} from 'forms';
 import styled from 'styled-components';
-import Loader from 'rambler-ui/Loader';
 import {withRouter} from 'react-router-dom';
 import {observer, Provider} from 'mobx-react';
 
-import {EventsStore} from 'stores/index';
-import CreateFormStore from 'stores/forms/Events/CreateForm';
+import {EventsStore} from 'stores';
+import EventFormState from 'stores/forms/events/EventForm';
 
-import {CreateForm} from './components/index';
+import {EventForm} from '..';
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  ${Button},
+  ${Input} {
+    margin: 8px;
+  }
+`;
 
 @withRouter
 @observer
@@ -23,49 +30,52 @@ class EventCreate extends React.Component {
     className: ''
   };
 
-  navigateTo = () => {
-    const {history} = this.props;
-
-    history.replace('/events');
-  };
-
   onSuccess = form => {
+    const {eventsStore} = this;
     const values = form.values();
-    const {eventsStore, navigateTo} = this;
 
     eventsStore.create(values)
-      .then(navigateTo)
-      .finally(form.reset.bind(form));
+      .then(() => history.push('/events'));
+  };
+
+  onClose = () => {
+    const {history} = this.props;
+
+    history.push('/events');
   };
 
   onError = form => {
     console.log('onError', {form});
   };
 
-  onClose = () => {
-    const {history} = this.props;
-
-    history.replace('/events');
+  onSubmit = () => {
+    this.eventsForm.submit();
   };
 
   constructor(props) {
     super(props);
 
     const {onSuccess, onError} = this;
-    this.createForm = new CreateFormStore({onSuccess, onError});
+    this.eventsForm = new EventFormState({onSuccess, onError});
 
     this.eventsStore = EventsStore.create();
   }
 
   render() {
     const {...rest} = this.props;
-    const {createForm, eventsStore, onClose} = this;
+    const {eventsForm, eventsStore, onSubmit, onClose} = this;
 
     return (
-      <Provider {...{createForm}}>
+      <Provider {...{eventsForm}}>
         <Wrapper {...rest}>
-          <Loader loading={eventsStore.isPending}>
-            <CreateForm {...{onClose}}/>
+          <div>EventCreate</div>
+
+          <Loader store={eventsStore}>
+            <EventForm/>
+
+            <Button onClick={onSubmit}>Create</Button>
+
+            <Button onClick={onClose}>Close</Button>
           </Loader>
         </Wrapper>
       </Provider>

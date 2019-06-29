@@ -1,8 +1,8 @@
-import { Chip } from 'atoms';
-import { Menu } from 'molecules';
+import { Chip } from 'atoms/index';
+import { Menu } from 'molecules/index';
 import menuMock from 'molecules/Menu/fixtures';
 
-import component from './Set';
+import component from '../../../index';
 
 export default [
   {

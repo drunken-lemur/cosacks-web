@@ -1,13 +1,11 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {observer} from 'mobx-react';
 import DevTools from 'mobx-react-devtools';
-import {Switch} from 'react-router-dom';
-
-import MainProvider from 'common/MainProvider';
-import CustomRoute from 'common/CustomRoute';
 
 import {LoginPage, NotFoundPage} from 'pages';
-import {Auth, Events, Orders} from 'Modules';
+import {Auth, Events, Users} from 'pages';
+
+import {PageGroup, MainProvider} from 'components/common';
 
 const routes = [{
   path: '/login',
@@ -16,9 +14,9 @@ const routes = [{
   path: '/auth',
   component: Auth
 }, {
-  path: '/orders',
+  path: '/users',
   isPrivate: true,
-  component: Orders
+  component: Users
 }, {
   path: '/events',
   isPrivate: true,
@@ -29,15 +27,11 @@ const routes = [{
 }];
 
 @observer
-class App extends Component {
+class App extends React.Component {
   render() {
     return (
       <MainProvider>
-        <Switch>
-          {routes.map((route, key) => (
-            <CustomRoute key={key} {...route} />
-          ))}
-        </Switch>
+        <PageGroup routes={routes} />
 
         {process.env.NODE_ENV === 'development' && (
           <DevTools position={{bottom: 5, right: 20}}/>

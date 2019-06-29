@@ -33,12 +33,12 @@ class UserList extends React.Component {
   render() {
     const {usersStore} = this;
     const {...rest} = this.props;
-
+    
     return (
       <Wrapper {...rest}>
         <div>UserList</div>
 
-        <Loader loading={usersStore.isPending}>
+        <Loader store={usersStore}>
           {usersStore.list.map(user => (
             <UserRow key={user.id} {...user}/>
           ))}

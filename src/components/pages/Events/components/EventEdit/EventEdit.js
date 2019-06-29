@@ -1,17 +1,24 @@
 import React from 'react';
 import {reaction} from 'mobx';
+import {history} from 'utils'
+import {Loader} from 'molecules';
 import PropTypes from 'prop-types';
-import Loader from 'rambler-ui/Loader';
+import {Button, Input} from 'forms';
 import styled from 'styled-components';
 import {withRouter} from 'react-router-dom';
 import {observer, Provider} from 'mobx-react';
 
-import {EventsStore} from 'stores/index';
-import EditFormStore from 'stores/forms/Events/EditForm';
+import {EventsStore} from 'stores';
+import EventFormState from 'stores/forms/events/EventForm';
 
-import {EditForm} from './components/index';
+import {EventForm} from '..';
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  ${Button},
+  ${Input} {
+    margin: 8px;
+  }
+`;
 
 @withRouter
 @observer
@@ -24,48 +31,45 @@ class EventEdit extends React.Component {
     className: ''
   };
 
-  navigateTo = ({data}) => {
-    const url = `/events/${data._id}/edit`;
-    const {history} = this.props;
-
-    console.log('navigateTo:', url);
-
-    history.replace(url);
-  };
-
   onSuccess = form => {
+    const {eventsStore} = this;
     const {match} = this.props;
     const data = form.values();
-    const {eventsStore, navigateTo} = this;
 
     eventsStore.update(match.params.id, data)
-      .then(navigateTo);
+      .then(() => history.push('/events'));
   };
 
   onClose = () => {
-    const {history} = this.props;
+    history.push('/events');
+  };
 
-    history.replace('/events');
+  onError = form => {
+    console.log('onError', {form});
+  };
+
+  onSubmit = () => {
+    this.eventsForm.submit();
   };
 
   constructor(props) {
     super(props);
 
     const {onSuccess, onError} = this;
-    this.editForm = new EditFormStore({onSuccess, onError});
+    this.eventsForm = new EventFormState({onSuccess, onError});
 
     this.eventsStore = EventsStore.create();
   }
 
   componentDidMount() {
     const {match} = this.props;
-    const {eventsStore, editForm} = this;
+    const {eventsStore, eventsForm} = this;
 
     this.reactions = [
       reaction(
         () => eventsStore.data,
         () => {
-          editForm.set('value', eventsStore.data.toJSON());
+          eventsForm.set('value', eventsStore.data.toJSON());
         }
       )
     ];
@@ -79,13 +83,19 @@ class EventEdit extends React.Component {
 
   render() {
     const {...rest} = this.props;
-    const {editForm, eventsStore, onClose} = this;
+    const {eventsForm, eventsStore, onSubmit, onClose} = this;
 
     return (
-      <Provider {...{editForm}}>
+      <Provider {...{eventsForm}}>
         <Wrapper {...rest}>
-          <Loader loading={eventsStore.isPending}>
-            <EditForm {...{onClose}}/>
+          <div>EventEdit</div>
+
+          <Loader store={eventsStore}>
+            <EventForm/>
+
+            <Button onClick={onSubmit}>Save</Button>
+
+            <Button onClick={onClose}>Close</Button>
           </Loader>
         </Wrapper>
       </Provider>

@@ -1,22 +1,73 @@
 import React from 'react';
+import {noop} from 'utils';
+import {Button} from 'forms';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import {NavLink} from 'react-router-dom';
 
-const Wrapper = styled.div``;
+const Wrapper = styled.article``;
 
 class EventRow extends React.PureComponent {
   static propTypes = {
-    className: PropTypes.string
+    className: PropTypes.string,
+    _id: PropTypes.string,
+    name: PropTypes.string,
+    description: PropTypes.string,
+    start: PropTypes.string,
+    end: PropTypes.string,
+    onView: PropTypes.func,
+    onEdit: PropTypes.func,
+    onDelete: PropTypes.func
   };
 
   static defaultProps = {
-    className: ''
+    className: '',
+    _id: '',
+    name: '',
+    description: '',
+    start: '',
+    end: '',
+    onView: noop,
+    onEdit: noop,
+    onDelete: noop
   };
 
   render() {
-    const {...rest} = this.props;
+    const {
+      _id,
+      name,
+      description,
+      start,
+      end,
+      onView,
+      onEdit,
+      onDelete,
+      ...rest
+    } = this.props;
 
-    return <Wrapper {...rest}>EventRow</Wrapper>;
+    return (
+      <Wrapper {...rest}>
+        <div>
+          <NavLink to={`/events/${_id}`}>
+            <strong>Name: </strong>{name}
+          </NavLink>
+        </div>
+
+        <div>
+          <strong>Description: </strong>{description}
+        </div>
+
+        <div>
+          <strong>Start: </strong>{start} - <strong>End: </strong>{end}
+        </div>
+
+        <Button onClick={onView(_id)}>View</Button>
+
+        <Button onClick={onEdit(_id)}>Edit</Button>
+
+        <Button onClick={onDelete(_id)}>Delete</Button>
+      </Wrapper>
+    );
   }
 }
 

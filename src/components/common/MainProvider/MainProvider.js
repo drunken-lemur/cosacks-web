@@ -1,14 +1,15 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import {history} from 'utils';
 import reset from 'styled-reset';
-import { Provider } from 'mobx-react';
-import { ApplyTheme } from 'rambler-ui/theme';
-import { BrowserRouter } from 'react-router-dom';
-import { ThemeProvider, createGlobalStyle } from 'styled-components';
+import {Provider} from 'mobx-react';
+import {Router} from 'react-router-dom';
+import {ApplyTheme} from 'rambler-ui/theme';
+import {createGlobalStyle, ThemeProvider} from 'styled-components';
 
 import theme from 'theme';
 import globalCss from 'theme/global.css';
 
-import AuthStore from "Stores/AuthStore";
+import AuthStore from 'Stores/AuthStore';
 
 const GlobalStyle = createGlobalStyle`
   ${reset};
@@ -17,25 +18,25 @@ const GlobalStyle = createGlobalStyle`
 
 const stores = {
   authStore: AuthStore.create()
-}
+};
 
 class MainProvider extends React.PureComponent {
   render() {
-    const { children } = this.props;
+    const {children} = this.props;
 
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <Provider {...stores}>
           <ThemeProvider theme={theme}>
             <ApplyTheme theme={theme}>
-              <Fragment>
-                <GlobalStyle />
+              <>
+                <GlobalStyle/>
                 {children}
-              </Fragment>
+              </>
             </ApplyTheme>
           </ThemeProvider>
         </Provider>
-      </BrowserRouter>
+      </Router>
     );
   }
 }

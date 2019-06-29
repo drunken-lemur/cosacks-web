@@ -7,17 +7,23 @@ const Wrapper = styled(RamblerLoader)``;
 
 class Loader extends React.PureComponent {
   static propTypes = {
-    className: PropTypes.string
-  };
-
-  static defaultProps = {
-    className: ''
+    store: PropTypes.object.isRequired
   };
 
   render() {
-    const { ...rest } = this.props;
+    const {store, children, ...rest} = this.props;
 
-    return <Wrapper {...rest}/>;
+    if (store.isError) {
+      const {message} = store.error.toJSON();
+
+      return `Error: ${message}. Something went wrong.....`;
+    }
+
+    return (
+      <Wrapper {...rest} loading={store.isPending}>
+        <>{children}</>
+      </Wrapper>
+    );
   }
 }
 

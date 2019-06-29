@@ -1,11 +1,13 @@
 import React from 'react';
-import {Button} from 'forms/index';
+import {Button} from 'forms';
+import {Loader} from 'molecules';
 import PropTypes from 'prop-types';
-import {EventsStore} from 'stores/index';
+import {EventsStore} from 'stores';
 import styled from 'styled-components';
-import Loader from 'rambler-ui/Loader';
 import {withRouter} from 'react-router-dom';
 import {observer, Provider} from 'mobx-react';
+
+import {EventCard} from '..';
 
 const Wrapper = styled.div``;
 
@@ -42,8 +44,6 @@ class EventView extends React.Component {
     const {...rest} = this.props;
     const {eventsStore, onClose} = this;
 
-    const event = eventsStore.data || {};
-
     return (
       <Provider>
         <Wrapper {...rest}>
@@ -51,20 +51,8 @@ class EventView extends React.Component {
 
           <Button onClick={onClose}>Close</Button>
 
-          <Loader loading={eventsStore.isPending}>
-            <article key={event._id}>
-              <div>
-                <strong>Name:</strong> {event.name}
-              </div>
-
-              <div>
-                <strong>Description:</strong> {event.description}
-              </div>
-
-              <div>
-                <strong>Start:</strong> {event.start} - <strong>End:</strong> {event.end}
-              </div>
-            </article>
+          <Loader store={eventsStore}>
+            <EventCard {...eventsStore.data}/>
           </Loader>
 
           <Button onClick={onClose}>Close</Button>

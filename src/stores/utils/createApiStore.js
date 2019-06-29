@@ -6,7 +6,7 @@ export const Statuses = {
   error: 'error'
 };
 
-const debug = true;
+const debug = false;
 
 const createApiStore = (model, service) => {
   return types
@@ -16,7 +16,8 @@ const createApiStore = (model, service) => {
       skip: types.maybeNull(types.number),
       total: types.maybeNull(types.number),
       limit: types.maybeNull(types.number),
-      status: types.maybeNull(types.enumeration(Object.keys(Statuses)))
+      status: types.maybeNull(types.enumeration(Object.keys(Statuses))),
+      error: types.maybeNull(types.frozen())
     })
     .views(self => ({
       get isDone() {
@@ -68,7 +69,7 @@ const createApiStore = (model, service) => {
 
       onError(error) {
         self.setStatusError();
-
+        self.error = error;
         return Promise.reject(error);
       },
 
