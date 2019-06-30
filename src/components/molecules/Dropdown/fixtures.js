@@ -1,7 +1,7 @@
 import React from 'react';
-import { Calendar } from 'organisms';
-import { Logo } from 'icons';
-import { Button, Input } from 'forms';
+import {Calendar} from 'organisms';
+import {Logo} from 'icons';
+import {Button, Input} from 'forms';
 import styled from 'styled-components';
 
 import component from './';
@@ -27,7 +27,7 @@ export default [
     component,
     name: 'With Button & Logo',
     props: {
-      children: <StyledLogo />,
+      children: <StyledLogo/>,
       anchor: <Button>Click Me</Button>,
       isOpened: true,
       onRequestClose: (...args) => {
@@ -40,7 +40,7 @@ export default [
     name: 'With Input & Calendar',
     props: {
       children: calendar,
-      anchor: <Input />,
+      anchor: <Input/>,
       isOpened: true,
       onRequestClose: (...args) => {
         console.log('args', args);

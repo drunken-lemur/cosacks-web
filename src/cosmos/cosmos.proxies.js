@@ -4,15 +4,15 @@ import MainProvider from 'common/MainProvider';
 
 const ThemeProxy = props => {
   const {
-    nextProxy: { value: NextProxy, next }
+    nextProxy: {value: NextProxy, next}
   } = props;
 
   return (
     <MainProvider>
-      <NextProxy {...props} nextProxy={next()} />
+      <NextProxy {...props} nextProxy={next()}/>
 
       {process.env.NODE_ENV === 'development' && (
-        <DevTools position={{ bottom: 5, right: 20 }} />
+        <DevTools position={{bottom: 5, right: 20}}/>
       )}
     </MainProvider>
   );

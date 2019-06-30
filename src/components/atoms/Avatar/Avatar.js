@@ -25,7 +25,7 @@ class Avatar extends React.PureComponent {
   };
 
   render() {
-    const { ...props } = this.props;
+    const {...props} = this.props;
 
     return <StyledAvatar {...props} />;
   }

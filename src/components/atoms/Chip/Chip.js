@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SuccessSmall } from 'icons';
-import styled, { css } from 'styled-components';
-import { typography, flexCenter } from 'theme/mixins';
+import {SuccessSmall} from 'icons';
+import styled, {css} from 'styled-components';
+import {flexCenter, typography} from 'theme/mixins';
 
 const Wrapper = styled.div`
   width: 44px;
@@ -27,8 +27,8 @@ const Wrapper = styled.div`
   }
 
   ${p =>
-    p.isSelected &&
-    css`
+  p.isSelected &&
+  css`
       border: 2px solid #5ab2d6;
 
       ${SuccessSmall} {
@@ -53,12 +53,12 @@ class Chip extends React.PureComponent {
   };
 
   render() {
-    const { className, onClick, isSelected, label } = this.props;
+    const {className, onClick, isSelected, label} = this.props;
 
     return (
-      <Wrapper {...{ className, onClick, isSelected }}>
+      <Wrapper {...{className, onClick, isSelected}}>
         {label}
-        <SuccessSmall />
+        <SuccessSmall/>
       </Wrapper>
     );
   }

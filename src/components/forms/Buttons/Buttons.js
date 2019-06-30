@@ -2,11 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
-  box-sizing: border-box;
-`;
+const Wrapper = styled.div``;
 
-class Block extends React.PureComponent {
+class Buttons extends React.PureComponent {
   static propTypes = {
     className: PropTypes.string
   };
@@ -16,10 +14,10 @@ class Block extends React.PureComponent {
   };
 
   render() {
-    const {children, ...rest} = this.props;
+    const {...rest} = this.props;
 
-    return <Wrapper {...rest}>{children}</Wrapper>;
+    return <Wrapper {...rest}>Component</Wrapper>;
   }
 }
 
-export default styled(Block)``;
+export default styled(Buttons)``;

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Sort } from 'icons';
+import {Sort} from 'icons';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
+import styled, {css} from 'styled-components';
 
 const Wrapper = styled.div`
   width: 8px;
@@ -14,16 +14,16 @@ const Wrapper = styled.div`
     }
 
     ${p =>
-      p.sort === 'desc' &&
-      css`
+  p.sort === 'desc' &&
+  css`
         path:nth-child(1) {
           fill: #5ab2d6;
         }
       `}
 
     ${p =>
-      p.sort === 'asc' &&
-      css`
+  p.sort === 'asc' &&
+  css`
         path:nth-child(2) {
           fill: #5ab2d6;
         }
@@ -43,11 +43,11 @@ class SortIcon extends React.PureComponent {
   };
 
   render() {
-    const { ...rest } = this.props;
+    const {...rest} = this.props;
 
     return (
       <Wrapper {...rest}>
-        <Sort />
+        <Sort/>
       </Wrapper>
     );
   }

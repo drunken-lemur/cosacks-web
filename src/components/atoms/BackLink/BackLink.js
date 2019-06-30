@@ -1,9 +1,9 @@
 import React from 'react';
-import { ArrowLeft } from 'icons';
+import {ArrowLeft} from 'icons';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { typography } from 'theme/mixins';
-import { NavLink } from 'react-router-dom';
+import {typography} from 'theme/mixins';
+import {NavLink} from 'react-router-dom';
 
 const Link = styled(NavLink)`
   color: #7892aa;
@@ -31,11 +31,11 @@ class BackLink extends React.PureComponent {
   };
 
   render() {
-    const { children, ...rest } = this.props;
+    const {children, ...rest} = this.props;
 
     return (
       <Link {...rest}>
-        <ArrowLeft />
+        <ArrowLeft/>
         {children}
       </Link>
     );

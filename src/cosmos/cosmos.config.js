@@ -1,6 +1,6 @@
 const overrides = require('../../config-overrides');
 
-const { context, options } = require('../setupProxy').config;
+const {context, options} = require('../setupProxy').config;
 
 var httpProxy = context.reduce((config, ctx) => {
   config[ctx] = options;

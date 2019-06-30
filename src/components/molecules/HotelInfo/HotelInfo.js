@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { typography } from 'theme/mixins';
-import { BlockShadow, Block, Text, Link } from 'atoms';
+import {typography} from 'theme/mixins';
+import {Block, BlockShadow, Link, Text} from 'atoms';
 
 const Wrapper = styled(BlockShadow)`
   padding: 0;
@@ -56,11 +56,11 @@ class HotelInfo extends React.PureComponent {
   };
 
   render() {
-    const { image, name, address, phone, link, ...rest } = this.props;
+    const {image, name, address, phone, link, ...rest} = this.props;
 
     return (
       <Wrapper {...rest}>
-        <img src={image} alt={name} />
+        <img src={image} alt={name}/>
 
         <Block>
           <Text className="title">{name}</Text>

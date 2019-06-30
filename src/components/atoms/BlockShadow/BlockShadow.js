@@ -1,5 +1,5 @@
 import React from 'react';
-import { Block } from 'atoms';
+import {Block} from 'atoms';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -25,7 +25,7 @@ class BlockShadow extends React.PureComponent {
   };
 
   render() {
-    const { children, ...rest } = this.props;
+    const {children, ...rest} = this.props;
 
     return <Wrapper {...rest}>{children}</Wrapper>;
   }

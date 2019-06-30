@@ -1,5 +1,5 @@
 import React from 'react';
-import { CircleArrow } from 'icons';
+import {CircleArrow} from 'icons';
 import PhoneIcon from 'rambler-ui/icons/forms/PhoneIcon';
 
 import component from './';
@@ -52,7 +52,7 @@ export default [
     component,
     name: 'example',
     props: {
-      icon: <PhoneIcon />,
+      icon: <PhoneIcon/>,
       items,
       onChange: i => console.log(i)
     }
@@ -61,7 +61,7 @@ export default [
     component,
     name: 'example 2',
     props: {
-      icon: <CircleArrow />,
+      icon: <CircleArrow/>,
       items,
       value: items[2],
       onChange: i => console.log(i)

@@ -14,5 +14,5 @@ module.exports = Object.assign(
   app => {
     app.use(proxy(config.context, config.options));
   },
-  { config }
+  {config}
 );

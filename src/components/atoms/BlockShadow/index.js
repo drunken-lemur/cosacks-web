@@ -1,1 +1,1 @@
-export { default } from './BlockShadow';
+export {default} from './BlockShadow';

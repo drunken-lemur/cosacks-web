@@ -1,11 +1,11 @@
 import React from 'react';
-import { Input } from 'forms';
+import {Input} from 'forms';
 import PropTypes from 'prop-types';
-import { Dropdown } from 'molecules';
-import { Calendar } from 'organisms';
+import {Dropdown} from 'molecules';
+import {Calendar} from 'organisms';
 import styled from 'styled-components';
-import { Calendar as CalendarIcon } from 'icons';
-import { ClearIcon } from 'rambler-ui/icons/forms';
+import {Calendar as CalendarIcon} from 'icons';
+import {ClearIcon} from 'rambler-ui/icons/forms';
 
 const formatter = new Intl.DateTimeFormat('ru-RU', {
   year: 'numeric',
@@ -90,7 +90,7 @@ class DatePicker extends React.Component {
     highlightWeekend: false,
     onChange: () => null,
     dateFormatter,
-    icon: <CalendarIcon />,
+    icon: <CalendarIcon/>,
     clearIcon: true
   };
 
@@ -100,21 +100,12 @@ class DatePicker extends React.Component {
   };
 
   preventClose = false;
-
-  constructor(props) {
-    super(props);
-
-    this.state.value = props.value;
-  }
-
-  open = () => this.setState({ isOpened: true });
-
-  close = () => this.setState({ isOpened: false });
-
+  open = () => this.setState({isOpened: true});
+  close = () => this.setState({isOpened: false});
   onChange = (_, value) => {
-    const { range, onChange } = this.props;
+    const {range, onChange} = this.props;
 
-    this.setState({ value });
+    this.setState({value});
 
     if (!range || (value[0] && value[1])) {
       this.close();
@@ -122,19 +113,16 @@ class DatePicker extends React.Component {
 
     onChange(value);
   };
-
   clear = e => {
-    const { range } = this.props;
+    const {range} = this.props;
 
     this.onChange(e, range ? [] : null);
   };
-
   onMouseDown = () => {
     this.preventClose = true;
 
     this.open();
   };
-
   onRequestClose = () => {
     if (!this.preventClose) {
       this.close();
@@ -142,10 +130,9 @@ class DatePicker extends React.Component {
 
     this.preventClose = false;
   };
-
   getProps = () => {
-    const { isOpened, value } = this.state;
-    const { onRequestClose, onChange, onMouseDown, clear } = this;
+    const {isOpened, value} = this.state;
+    const {onRequestClose, onChange, onMouseDown, clear} = this;
 
     const {
       // Calendar props
@@ -194,7 +181,7 @@ class DatePicker extends React.Component {
     const iconRight = clearIcon && !isEmpty && (
       <ClearIcon
         onClick={clear}
-        style={{ cursor: 'pointer', pointerEvents: 'all' }}
+        style={{cursor: 'pointer', pointerEvents: 'all'}}
       />
     );
 
@@ -245,8 +232,14 @@ class DatePicker extends React.Component {
     };
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state.value = props.value;
+  }
+
   render() {
-    const { dropdown, calendar, anchor, rest } = this.getProps();
+    const {dropdown, calendar, anchor, rest} = this.getProps();
 
     return (
       <Wrapper {...rest}>

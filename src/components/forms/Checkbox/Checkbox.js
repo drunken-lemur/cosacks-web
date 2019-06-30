@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { observer } from "mobx-react";
-import { ruiClass } from 'theme/mixins';
+import {observer} from 'mobx-react';
+import {ruiClass} from 'theme/mixins';
 import Checkbox_ from 'rambler-ui/Checkbox';
 
 const StyledCheckbox = styled(Checkbox_)`
@@ -48,7 +48,7 @@ class Checkbox extends React.Component {
   };
 
   render() {
-    const { field, ...rest } = this.props;
+    const {field, ...rest} = this.props;
 
     return (
       <StyledCheckbox

@@ -1,5 +1,5 @@
-import { Chip } from 'atoms/index';
-import { Menu } from 'molecules/index';
+import {Chip} from 'atoms/index';
+import {Menu} from 'molecules/index';
 import menuMock from 'molecules/Menu/fixtures';
 
 import component from '../../../index';
@@ -12,12 +12,12 @@ export default [
       component: Chip,
       props: {},
       propsList: [
-        { label: 1 },
+        {label: 1},
         {
           label: 2,
           isSelected: true
         },
-        { label: 3 }
+        {label: 3}
       ]
     }
   },

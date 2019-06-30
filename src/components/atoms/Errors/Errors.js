@@ -20,7 +20,7 @@ class Errors extends React.PureComponent {
   };
 
   render() {
-    const { error, errors, ...rest } = this.props;
+    const {error, errors, ...rest} = this.props;
 
     return !error && !errors.length ? null : (
       <Wrapper {...rest}>

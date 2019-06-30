@@ -1,1 +1,1 @@
-export { default } from './RamblerTheme';
+export {default} from './RamblerTheme';

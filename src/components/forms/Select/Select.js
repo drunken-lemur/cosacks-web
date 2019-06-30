@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { ruiClass } from 'theme/mixins';
-import { MenuItem } from 'rambler-ui/Menu';
+import {ruiClass} from 'theme/mixins';
+import {MenuItem} from 'rambler-ui/Menu';
 import RamblerSelect from 'rambler-ui/Select';
 
-import { CornerDown } from 'icons';
+import {CornerDown} from 'icons';
 
 const Wrapper = styled.div`
   &&& {
@@ -100,7 +100,7 @@ class Select extends React.PureComponent {
     inputValueRenderer: value => value && value.label,
     disabled: false,
     readOnly: false,
-    arrowIcon: <CornerDown />,
+    arrowIcon: <CornerDown/>,
     size: 'medium',
     variation: 'regular',
     status: null,
@@ -114,16 +114,16 @@ class Select extends React.PureComponent {
   };
 
   onChange = value => {
-    const { onChange } = this.props;
+    const {onChange} = this.props;
 
-    this.setState({ value });
+    this.setState({value});
 
     onChange(value);
   };
 
   render() {
-    const { state, onChange } = this;
-    const { items, value, icon, ...rest } = this.props;
+    const {state, onChange} = this;
+    const {items, value, icon, ...rest} = this.props;
 
     return (
       <Wrapper>

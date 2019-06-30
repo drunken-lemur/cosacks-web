@@ -1,7 +1,7 @@
 import React from 'react';
 import component from './';
 import PhoneIcon from 'rambler-ui/icons/forms/PhoneIcon';
-import { ReactComponent as CircleArrowIcon } from 'assets/icons/circle-arrow.svg';
+import {ReactComponent as CircleArrowIcon} from 'assets/icons/circle-arrow.svg';
 
 const items = [
   {
@@ -51,7 +51,7 @@ export default [
     component,
     name: 'example',
     props: {
-      icon: <PhoneIcon />,
+      icon: <PhoneIcon/>,
       items,
       onChange: i => console.log(i)
     }
@@ -60,7 +60,7 @@ export default [
     component,
     name: 'example 2',
     props: {
-      icon: <CircleArrowIcon />,
+      icon: <CircleArrowIcon/>,
       items,
       value: items[2],
       onChange: i => console.log(i)

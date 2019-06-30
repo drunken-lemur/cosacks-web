@@ -43,7 +43,7 @@ class Calendar extends React.PureComponent {
   };
 
   render() {
-    const { ...rest } = this.props;
+    const {...rest} = this.props;
 
     return (
       <Flex>

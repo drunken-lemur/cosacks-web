@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
-import { typography } from 'theme/mixins';
+import styled, {css} from 'styled-components';
+import {typography} from 'theme/mixins';
 
 export const variants = {
   reserved: {
@@ -58,7 +58,7 @@ class Caption extends React.PureComponent {
   };
 
   render() {
-    const { children, ...rest } = this.props;
+    const {children, ...rest} = this.props;
 
     return <Wrapper {...rest}>{children}</Wrapper>;
   }

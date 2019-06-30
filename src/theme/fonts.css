@@ -1,53 +1,35 @@
 @font-face {
   font-family: HelveticaNeue;
-  src: url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Roman/HelveticaNeueCyr-Roman.woff2')
-      format('woff2'),
-    url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Roman/HelveticaNeueCyr-Roman.woff')
-      format('woff'),
-    url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Roman/HelveticaNeueCyr-Roman.svg')
-      format('svg'),
-    url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Roman/HelveticaNeueCyr-Roman.eot')
-      format('eot'),
-    url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Roman/HelveticaNeueCyr-Roman.ttf')
-      format('truetype'),
-    url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Roman/HelveticaNeueCyr-Roman.otf')
-      format('opentype');
+  src: url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Roman/HelveticaNeueCyr-Roman.woff2') format('woff2'),
+  url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Roman/HelveticaNeueCyr-Roman.woff') format('woff'),
+  url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Roman/HelveticaNeueCyr-Roman.svg') format('svg'),
+  url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Roman/HelveticaNeueCyr-Roman.eot') format('eot'),
+  url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Roman/HelveticaNeueCyr-Roman.ttf') format('truetype'),
+  url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Roman/HelveticaNeueCyr-Roman.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: HelveticaNeue;
-  src: url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Medium/HelveticaNeueCyr-Medium.woff2')
-      format('woff2'),
-    url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Medium/HelveticaNeueCyr-Medium.woff')
-      format('woff'),
-    url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Medium/HelveticaNeueCyr-Medium.svg')
-      format('svg'),
-    url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Medium/HelveticaNeueCyr-Medium.eot')
-      format('eot'),
-    url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Medium/HelveticaNeueCyr-Medium.ttf')
-      format('truetype'),
-    url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Medium/HelveticaNeueCyr-Medium.otf')
-      format('opentype');
+  src: url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Medium/HelveticaNeueCyr-Medium.woff2') format('woff2'),
+  url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Medium/HelveticaNeueCyr-Medium.woff') format('woff'),
+  url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Medium/HelveticaNeueCyr-Medium.svg') format('svg'),
+  url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Medium/HelveticaNeueCyr-Medium.eot') format('eot'),
+  url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Medium/HelveticaNeueCyr-Medium.ttf') format('truetype'),
+  url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Medium/HelveticaNeueCyr-Medium.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: HelveticaNeue;
-  src: url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Bold/HelveticaNeueCyr-Bold.woff2')
-      format('woff2'),
-    url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Bold/HelveticaNeueCyr-Bold.woff')
-      format('woff'),
-    url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Bold/HelveticaNeueCyr-Bold.svg')
-      format('svg'),
-    url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Bold/HelveticaNeueCyr-Bold.eot')
-      format('eot'),
-    url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Bold/HelveticaNeueCyr-Bold.ttf')
-      format('truetype'),
-    url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Bold/HelveticaNeueCyr-Bold.otf')
-      format('opentype');
+  src: url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Bold/HelveticaNeueCyr-Bold.woff2') format('woff2'),
+  url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Bold/HelveticaNeueCyr-Bold.woff') format('woff'),
+  url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Bold/HelveticaNeueCyr-Bold.svg') format('svg'),
+  url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Bold/HelveticaNeueCyr-Bold.eot') format('eot'),
+  url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Bold/HelveticaNeueCyr-Bold.ttf') format('truetype'),
+  url('../assets/fonts/HelveticalNeue/HelveticaNeueCyr-Bold/HelveticaNeueCyr-Bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
 }

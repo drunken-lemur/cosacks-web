@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import {css} from 'styled-components';
 
 export const typography = (
   size,
@@ -40,11 +40,11 @@ export const display = (
 ) => css`
   display: ${display};
   ${alignItems &&
-    css`
+css`
       align-items: ${alignItems};
     `};
   ${justifyContent &&
-    css`
+css`
       justify-content: ${justifyContent};
     `};
 `;

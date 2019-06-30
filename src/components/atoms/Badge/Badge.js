@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
+import styled, {css} from 'styled-components';
 
 const Wrapper = styled.div`
-  ${({ theme: { badge } }) => css`
+  ${({theme: {badge}}) => css`
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -33,7 +33,7 @@ class Badge extends React.PureComponent {
   };
 
   render() {
-    const { count, ...rest } = this.props;
+    const {count, ...rest} = this.props;
 
     return <Wrapper {...rest}>{count}</Wrapper>;
   }

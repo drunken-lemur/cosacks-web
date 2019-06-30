@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import client from './feathers';
 
 export default class Login extends Component {
@@ -8,23 +8,23 @@ export default class Login extends Component {
   }
 
   updateField(name, ev) {
-    this.setState({ [name]: ev.target.value });
+    this.setState({[name]: ev.target.value});
   }
 
   login() {
-    const { email, password } = this.state;
+    const {email, password} = this.state;
 
     return client.authenticate({
       strategy: 'local',
       email, password
-    }).catch(error => this.setState({ error }));
+    }).catch(error => this.setState({error}));
   }
 
   signup() {
-    const { email, password } = this.state;
+    const {email, password} = this.state;
 
     return client.service('users')
-      .create({ email, password })
+      .create({email, password})
       .then(() => this.login());
   }
 
@@ -41,11 +41,13 @@ export default class Login extends Component {
         <div className="col-12 col-6-tablet push-3-tablet col-4-desktop push-4-desktop">
           <form className="form">
             <fieldset>
-              <input className="block" type="email" name="email" placeholder="email" onChange={ev => this.updateField('email', ev)} />
+              <input className="block" type="email" name="email" placeholder="email"
+                     onChange={ev => this.updateField('email', ev)}/>
             </fieldset>
 
             <fieldset>
-              <input className="block" type="password" name="password" placeholder="password" onChange={ev => this.updateField('password', ev)} />
+              <input className="block" type="password" name="password" placeholder="password"
+                     onChange={ev => this.updateField('password', ev)}/>
             </fieldset>
 
             <button type="button" className="button button-primary block signup" onClick={() => this.login()}>

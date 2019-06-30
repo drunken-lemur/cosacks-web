@@ -1,12 +1,12 @@
 import React from 'react';
-import { Logo } from 'icons';
-import { Menu } from 'molecules';
+import {Logo} from 'icons';
+import {Menu} from 'molecules';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
-import { flexCenterBetween, flexCenter } from 'theme/mixins';
+import {NavLink} from 'react-router-dom';
+import {flexCenter, flexCenterBetween} from 'theme/mixins';
 
-import { UserBar } from './components';
+import {UserBar} from './components';
 
 const items = [
   {
@@ -62,18 +62,18 @@ class Header extends React.PureComponent {
   };
 
   render() {
-    const { menuItems, user, ...rest } = this.props;
+    const {menuItems, user, ...rest} = this.props;
 
     return (
       <Wrapper {...rest}>
         <InnerWrapper>
           <LogoWrapper>
             <NavLink to="/">
-              <Logo />
+              <Logo/>
             </NavLink>
           </LogoWrapper>
 
-          <Menu items={[...menuItems, ...items]} />
+          <Menu items={[...menuItems, ...items]}/>
         </InnerWrapper>
 
         <UserBar {...user} />

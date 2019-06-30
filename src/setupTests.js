@@ -1,11 +1,11 @@
 import React from 'react';
 import 'jest-styled-components';
 import Adapter from 'enzyme-adapter-react-16';
-import { configure, shallow, render, mount } from 'enzyme';
+import {configure, mount, render, shallow} from 'enzyme';
 
 import MainProvider from 'common/MainProvider';
 
-configure({ adapter: new Adapter() });
+configure({adapter: new Adapter()});
 
 global.shallow = shallow;
 global.render = render;

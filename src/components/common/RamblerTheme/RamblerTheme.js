@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { observer } from 'mobx-react';
-import { ApplyTheme } from 'rambler-ui/theme';
-import { createTheme } from 'rambler-ui/theme/base';
+import {observer} from 'mobx-react';
+import {ApplyTheme} from 'rambler-ui/theme';
+import {createTheme} from 'rambler-ui/theme/base';
 
 import colors from 'themes/colors';
 
@@ -18,7 +18,7 @@ class RamblerTheme extends React.Component {
   };
 
   render() {
-    const { children, config } = this.props;
+    const {children, config} = this.props;
 
     if (!config.colors) {
       config.colors = {};

@@ -32,7 +32,7 @@ class Dropdown extends React.PureComponent {
 
   static defaultProps = {
     className: '',
-    style: { padding: '10px 0' },
+    style: {padding: '10px 0'},
     closeOnClickOutside: true,
     contentPointX: 'left',
     anchorPointX: 'left',
@@ -43,7 +43,7 @@ class Dropdown extends React.PureComponent {
   };
 
   render() {
-    const { children, ...rest } = this.props;
+    const {children, ...rest} = this.props;
 
     return <StyledDropdown {...rest}>{children}</StyledDropdown>;
   }

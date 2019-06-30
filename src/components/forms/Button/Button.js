@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import RamblerButton from 'rambler-ui/Button';
-import styled, { css } from 'styled-components';
-import { typography, transition } from 'theme/mixins';
+import styled, {css} from 'styled-components';
+import {transition, typography} from 'theme/mixins';
 
 export const variants = {
   primary: {
@@ -120,9 +120,9 @@ const StyledButton = styled(RamblerButton)`
     `};
 
     ${p =>
-      p.disabled
-        ? variant('disabled')
-        : css`
+  p.disabled
+    ? variant('disabled')
+    : css`
             ${variant('default')};
 
             &:hover {
@@ -168,10 +168,10 @@ class Button extends React.PureComponent {
   };
 
   render() {
-    const { children, variant: type, type: buttonType, ...rest } = this.props;
+    const {children, variant: type, type: buttonType, ...rest} = this.props;
 
     return (
-      <StyledButton {...{ ...rest, type, buttonType }}>{children}</StyledButton>
+      <StyledButton {...{...rest, type, buttonType}}>{children}</StyledButton>
     );
   }
 }

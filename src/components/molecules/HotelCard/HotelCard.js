@@ -1,9 +1,9 @@
 import React from 'react';
-import { Star } from 'icons';
+import {Star} from 'icons';
 import PropTypes from 'prop-types';
-import { formatPrice } from 'utils';
-import styled, { css } from 'styled-components';
-import { typography, display, transition } from 'theme/mixins';
+import {formatPrice} from 'utils';
+import styled, {css} from 'styled-components';
+import {display, transition, typography} from 'theme/mixins';
 
 import noPhotoSvgPath from 'assets/icons/no-photo.svg';
 
@@ -132,7 +132,7 @@ class HotelCard extends React.PureComponent {
   };
 
   render() {
-    const { name, rating, address, price, image, ...rest } = this.props;
+    const {name, rating, address, price, image, ...rest} = this.props;
 
     return (
       <Wrapper {...rest}>
@@ -140,7 +140,7 @@ class HotelCard extends React.PureComponent {
           <Title>{name}</Title>
 
           <Rating>
-            <Star /> {rating}
+            <Star/> {rating}
           </Rating>
         </TitleWrapper>
 
@@ -152,7 +152,7 @@ class HotelCard extends React.PureComponent {
           </Center>
 
           <ImageWrapper>
-            <Image src={image} />
+            <Image src={image}/>
             <ImageOverlay>Подробнее</ImageOverlay>
           </ImageWrapper>
         </InnerWrapper>

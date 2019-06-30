@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { observer } from 'mobx-react';
+import {observer} from 'mobx-react';
 import styled from 'styled-components';
-import { ruiClass } from 'theme/mixins';
+import {ruiClass} from 'theme/mixins';
 
-import { MenuItem } from 'rambler-ui/Menu';
+import {MenuItem} from 'rambler-ui/Menu';
 import RamblerSelect from 'rambler-ui/Select';
 import Loader from 'rambler-ui/Loader';
 
@@ -51,12 +51,12 @@ const Wrapper = styled.div`
 @observer
 class Select extends Component {
   inputValueRenderer = value => {
-    const { labelKey } = this.props;
+    const {labelKey} = this.props;
     return value && value[labelKey];
   };
 
   onChange = value => {
-    const { field, onChange } = this.props;
+    const {field, onChange} = this.props;
 
     if (onChange) return onChange(value);
 
@@ -99,7 +99,7 @@ class Select extends Component {
             {...rest}
             icon={icon}
             inputValueRenderer={this.inputValueRenderer}
-            {...field.bind({ onChange: this.onChange })}
+            {...field.bind({onChange: this.onChange})}
           >
             {menuOptions}
           </RamblerSelect>

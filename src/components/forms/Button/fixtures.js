@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import React, { Fragment } from 'react';
+import React, {Fragment} from 'react';
 
-import component, { variants } from './Button';
+import component, {variants} from './Button';
 
 const children = 'Click me';
 

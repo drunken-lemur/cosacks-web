@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { typography } from 'theme/mixins';
+import {typography} from 'theme/mixins';
 
 const Wrapper = styled.div`
   display: flex;
@@ -33,7 +33,7 @@ class DoubleTitle extends React.PureComponent {
   };
 
   render() {
-    const { title, subTitle, children, ...rest } = this.props;
+    const {title, subTitle, children, ...rest} = this.props;
 
     return (
       <Wrapper {...rest}>

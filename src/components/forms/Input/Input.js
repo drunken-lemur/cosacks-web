@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { typography } from 'theme/mixins';
-import { setDisplayName } from 'recompose';
-import { observer } from 'mobx-react';
+import {typography} from 'theme/mixins';
+import {setDisplayName} from 'recompose';
+import {observer} from 'mobx-react';
 import RamblerInput from 'rambler-ui/Input';
-import styled, { css } from 'styled-components';
+import styled, {css} from 'styled-components';
 
 export const variations = {
   regular: {
@@ -82,11 +82,11 @@ const StyledInput = styled(RamblerInput)`
       ${typography(13, 15, 400)};
 
       ${p =>
-        p.disabled
-          ? variation('disabled')
-          : p.status
-          ? variation(p.status)
-          : variation('default')};
+  p.disabled
+    ? variation('disabled')
+    : p.status
+    ? variation(p.status)
+    : variation('default')};
 
       :focus {
         ${variation('focused')};
@@ -138,7 +138,7 @@ class Input extends React.Component {
   };
 
   render() {
-    const { field, ...rest } = this.props;
+    const {field, ...rest} = this.props;
 
     return <StyledInput {...field && field.bind()} {...rest} />;
   }

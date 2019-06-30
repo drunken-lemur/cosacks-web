@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button} from 'forms';
-import {history} from 'utils'
+import {history} from 'utils';
 import PropTypes from 'prop-types';
 import {EventsStore} from 'stores';
 import styled from 'styled-components';

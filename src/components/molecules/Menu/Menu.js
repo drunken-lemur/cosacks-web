@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
-import styled, { css } from 'styled-components';
-import { typography, flexCenterBetween, flexCenter } from 'theme/mixins';
+import {NavLink} from 'react-router-dom';
+import styled from 'styled-components';
+import {flexCenter, flexCenterBetween, typography} from 'theme/mixins';
 
 const Wrapper = styled.div`
   ${flexCenterBetween()};
@@ -44,11 +44,11 @@ class Menu extends React.PureComponent {
   };
 
   render() {
-    const { items, ...rest } = this.props;
+    const {items, ...rest} = this.props;
 
     return (
       <Wrapper {...rest}>
-        {items.map(({ title, isActive, to = '#', ...rest }, key) => (
+        {items.map(({title, isActive, to = '#', ...rest}, key) => (
           <Item key={key} {...rest} to={to}>
             {title}
           </Item>

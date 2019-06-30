@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { typography } from 'theme/mixins';
+import {typography} from 'theme/mixins';
 
 const Wrapper = styled.div`
   color: #6b707b;
@@ -18,7 +18,7 @@ class Text extends React.PureComponent {
   };
 
   render() {
-    const { children, ...rest } = this.props;
+    const {children, ...rest} = this.props;
 
     return <Wrapper {...rest}>{children}</Wrapper>;
   }

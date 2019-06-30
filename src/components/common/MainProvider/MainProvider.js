@@ -8,6 +8,7 @@ import {createGlobalStyle, ThemeProvider} from 'styled-components';
 
 import theme from 'theme';
 import globalCss from 'theme/global.css';
+import 'semantic-ui-css/semantic.min.css';
 
 import AuthStore from 'stores/auth/AuthStore';
 
@@ -20,7 +21,7 @@ class MainProvider extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.authStore = AuthStore.create()
+    this.authStore = AuthStore.create();
   }
 
   render() {

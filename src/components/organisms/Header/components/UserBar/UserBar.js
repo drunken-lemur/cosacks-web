@@ -1,9 +1,9 @@
 import React from 'react';
-import { Avatar } from 'atoms';
+import {Avatar} from 'atoms';
 import PropTypes from 'prop-types';
-import { CornerDown } from 'icons';
+import {CornerDown} from 'icons';
 import styled from 'styled-components';
-import { typography, flexCenterBetween } from 'theme/mixins';
+import {flexCenterBetween, typography} from 'theme/mixins';
 
 const Wrapper = styled.div`
   ${flexCenterBetween()};
@@ -39,15 +39,15 @@ class UserBar extends React.PureComponent {
   };
 
   render() {
-    const { avatar, name, ...rest } = this.props;
+    const {avatar, name, ...rest} = this.props;
 
     return (
       <Wrapper {...rest}>
-        <Avatar src={avatar} size={25} />
+        <Avatar src={avatar} size={25}/>
 
         <UserName>
           {name}
-          <CornerDown />
+          <CornerDown/>
         </UserName>
       </Wrapper>
     );

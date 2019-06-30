@@ -1,1 +1,1 @@
-export { default } from './HotelInfo';
+export {default} from './HotelInfo';

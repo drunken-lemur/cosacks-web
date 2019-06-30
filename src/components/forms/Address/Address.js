@@ -1,19 +1,23 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { observer } from 'mobx-react';
+import {observer} from 'mobx-react';
 import GeosuggestInput from 'react-geosuggest';
 
 import './style.scss';
 
 @observer
 class Address extends Component {
-  onFocus = () => {};
+  onFocus = () => {
+  };
 
-  onBlur = value => {};
+  onBlur = value => {
+  };
 
-  onChange = value => {};
+  onChange = value => {
+  };
 
-  onSuggestNoResults = userInput => {};
+  onSuggestNoResults = userInput => {
+  };
 
   onSuggestSelect = suggest => {
     if (!suggest) {
@@ -21,7 +25,7 @@ class Address extends Component {
       return;
     }
 
-    const { label, location } = suggest;
+    const {label, location} = suggest;
 
     this.props.field.set({
       location: label,
@@ -41,7 +45,7 @@ class Address extends Component {
   };
 
   render() {
-    const { field, disabled, fixtures, ...rest } = this.props;
+    const {field, disabled, fixtures, ...rest} = this.props;
 
     return (
       <GeosuggestInput

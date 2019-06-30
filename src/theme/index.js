@@ -1,4 +1,4 @@
-import { fade, darken, lighten, mix } from 'rambler-ui/utils/colors';
+import {darken, fade, lighten, mix} from 'rambler-ui/utils/colors';
 import i18n from 'rambler-ui/theme/base/i18n';
 
 import fonts from './fonts';

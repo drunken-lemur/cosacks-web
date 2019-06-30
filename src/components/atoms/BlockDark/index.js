@@ -1,1 +1,1 @@
-export { default } from './BlockDark';
+export {default} from './BlockDark';
