@@ -1,11 +1,12 @@
 import React from 'react';
 import {Errors} from 'atoms';
 import PropTypes from 'prop-types';
-import {inject, observer} from 'mobx-react';
 import styled from 'styled-components';
+import {Form} from 'semantic-ui-react';
+import {inject, observer} from 'mobx-react';
 import {branch, setDisplayName} from 'recompose';
 
-const Wrapper = styled.div``;
+const Wrapper = styled(Form.Field)``;
 
 const Label = styled.label`
   user-select: none;
@@ -48,15 +49,17 @@ class Field extends React.Component {
       return null;
     }
 
+    const {label, ...props} = field.bind();
+
     return (
       <Wrapper className={className}>
-        {!!field.label && (
+        {!!label && (
           <Label htmlFor={field.id}>
-            {field.label}
+            {label}
           </Label>
         )}
 
-        <Component {...rest} field={field}/>
+        <Component {...rest} {...props}/>
 
         <Errors error={field.error}/>
       </Wrapper>

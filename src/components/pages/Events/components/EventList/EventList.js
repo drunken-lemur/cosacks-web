@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import {EventsStore} from 'stores';
 import styled from 'styled-components';
 import {List, Loader} from 'molecules';
+import {Header} from 'semantic-ui-react';
 import {observer, Provider} from 'mobx-react';
 
 import {EventRow} from './components';
@@ -59,7 +60,7 @@ class EventList extends React.Component {
     return (
       <Provider>
         <Wrapper {...rest}>
-          <div>EventsList</div>
+          <Header as="h1">EventsList</Header>
 
           <Button onClick={onCreate}>Create</Button>
 

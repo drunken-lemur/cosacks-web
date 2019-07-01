@@ -20,14 +20,22 @@ const Wrapper = styled.div`
     color: #000;
   }
   
-  ${Input} {
-    background: #fff;
-  }
-  
-  ${Input},
-  ${Button},
-   article {
-    margin: 8px;
+  && {
+    ${Input} {
+      margin-bottom: 8px;
+    }
+    
+    ${Button} {
+      margin-top: 8px;
+      margin-bottom: 8px;
+      + ${Button} {
+        margin-left: 8px;
+      }    
+    }
+   
+    article {
+      padding: 8px;
+    }
   }
 `;
 

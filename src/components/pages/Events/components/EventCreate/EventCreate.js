@@ -4,6 +4,7 @@ import {history} from 'utils';
 import {Loader} from 'molecules';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Header } from 'semantic-ui-react'
 import {observer, Provider} from 'mobx-react';
 
 import {EventsStore} from 'stores';
@@ -59,7 +60,7 @@ class EventCreate extends React.Component {
     return (
       <Provider eventsForm={eventsForm}>
         <Wrapper {...rest}>
-          <div>EventCreate</div>
+          <Header as="h1">EventCreate</Header>
 
           <Loader store={eventsStore}>
             <EventForm onSubmit={onSubmit}/>

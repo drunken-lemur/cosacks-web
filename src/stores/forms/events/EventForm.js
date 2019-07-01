@@ -9,7 +9,12 @@ const placeholders = {
   end: 'End'
 };
 
-const labels = {};
+const labels = {
+  name: 'Name',
+  description: 'Description',
+  start: 'Start',
+  end: 'End'
+};
 
 const extra = {};
 

@@ -6,7 +6,15 @@ const Wrapper = styled.div``;
 
 class Buttons extends React.PureComponent {
   static propTypes = {
-    className: PropTypes.string
+    className: PropTypes.string,
+    buttons: PropTypes.arrayOf(
+      PropTypes.shape({
+
+      })
+    ),
+    onSubmit: PropTypes.func,
+    onClose: PropTypes.func,
+    onReset: PropTypes.func,
   };
 
   static defaultProps = {
@@ -16,7 +24,7 @@ class Buttons extends React.PureComponent {
   render() {
     const {...rest} = this.props;
 
-    return <Wrapper {...rest}>Component</Wrapper>;
+    return <Wrapper {...rest}>Buttons</Wrapper>;
   }
 }
 

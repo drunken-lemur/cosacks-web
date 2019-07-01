@@ -3,8 +3,9 @@ import {noop} from 'utils';
 import PropTypes from 'prop-types';
 import {Provider} from 'mobx-react';
 import styled from 'styled-components';
+import {Form as BaseForm} from 'semantic-ui-react';
 
-const StyledForm = styled.form``;
+const StyledForm = styled(BaseForm)``;
 
 class Form extends React.PureComponent {
   static propTypes = {

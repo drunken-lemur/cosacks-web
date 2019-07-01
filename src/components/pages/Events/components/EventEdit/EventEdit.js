@@ -3,6 +3,7 @@ import {Button} from 'forms';
 import {reaction} from 'mobx';
 import {Loader} from 'molecules';
 import styled from 'styled-components';
+import {Header} from 'semantic-ui-react';
 import {getParams, history} from 'utils';
 import {withRouter} from 'react-router-dom';
 import {observer, Provider} from 'mobx-react';
@@ -70,7 +71,7 @@ class EventEdit extends React.Component {
     return (
       <Provider eventsForm={eventsForm}>
         <Wrapper {...rest}>
-          <div>EventEdit</div>
+          <Header as="h1">EventEdit</Header>
 
           <Loader store={eventsStore}>
             <EventForm/>
