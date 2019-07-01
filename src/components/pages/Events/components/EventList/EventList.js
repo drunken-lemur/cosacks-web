@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 import {EventsStore} from 'stores';
 import styled from 'styled-components';
 import {List, Loader} from 'molecules';
-import {Header} from 'semantic-ui-react';
 import {observer, Provider} from 'mobx-react';
+import {Container, Header} from 'semantic-ui-react';
 
 import {EventRow} from './components';
 
-const Wrapper = styled.div``;
+const Wrapper = styled(Container)``;
 
 @observer
 class EventList extends React.Component {
@@ -58,25 +58,27 @@ class EventList extends React.Component {
     const events = eventsStore.list.toJSON();
 
     return (
-      <Provider>
-        <Wrapper {...rest}>
-          <Header as="h1">EventsList</Header>
+      <Wrapper {...rest}>
+        <Provider>
+          <>
+            <Header as="h1">EventsList</Header>
 
-          <Button onClick={onCreate}>Create</Button>
+            <Button onClick={onCreate}>Create</Button>
 
-          <Loader store={eventsStore}>
-            <List
-              list={events}
-              onView={onView}
-              onEdit={onEdit}
-              onDelete={onDelete}
-              component={EventRow}
-            />
-          </Loader>
+            <Loader store={eventsStore}>
+              <List
+                list={events}
+                onView={onView}
+                onEdit={onEdit}
+                onDelete={onDelete}
+                component={EventRow}
+              />
+            </Loader>
 
-          <Button onClick={onCreate}>Create</Button>
-        </Wrapper>
-      </Provider>
+            <Button onClick={onCreate}>Create</Button>
+          </>
+        </Provider>
+      </Wrapper>
     );
   }
 }

@@ -1,8 +1,8 @@
 import React from 'react';
-import {Logo} from 'icons';
 import {Menu} from 'molecules';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import {Icon} from 'semantic-ui-react';
 import {NavLink} from 'react-router-dom';
 import {flexCenter, flexCenterBetween} from 'theme/mixins';
 
@@ -19,6 +19,11 @@ const items = [
   }
 ];
 
+const Logo = styled(Icon).attrs({
+  name: 'world',
+  size: 'huge'
+})``;
+
 const Wrapper = styled.div`
   height: 72px;
   background: #9cb4ca;
@@ -26,6 +31,11 @@ const Wrapper = styled.div`
 
   ${UserBar} {
     margin-right: 20px;
+  }
+  
+  i.huge.icon {
+    font-size: 3em;
+    color: #f6f8fb;
   }
 `;
 

@@ -4,8 +4,9 @@ import {Button} from 'forms';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {NavLink} from 'react-router-dom';
+import {Segment} from 'semantic-ui-react';
 
-const Wrapper = styled.article``;
+const Wrapper = styled(Segment)``;
 
 class EventRow extends React.PureComponent {
   static propTypes = {
